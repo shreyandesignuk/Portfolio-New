@@ -1,0 +1,6836 @@
+@font-face {
+  font-family: "Google Sans Flex";
+  src: url("/fonts/google-sans-flex.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 1 1000;
+  font-stretch: 25% 151%;
+  font-display: swap;
+}
+
+:root {
+  --content-width: 1280px;
+  --page-width: 1440px;
+  --grid-column: 586px;
+  --grid-gutter: 108px;
+  --page-gutter: 80px;
+  --color-background: #f6f6f6;
+  --color-surface: #ffffff;
+  --color-footer: #101010;
+  --color-text: #101010;
+  --color-muted: #606060;
+  --color-subtle: #909090;
+  --color-border: #c0c0c0;
+  --color-accent: #6a71e6;
+  --font-display: "Google Sans Flex", "Helvetica Neue", Arial, sans-serif;
+  --font-system: Arial, sans-serif;
+  color: var(--color-text);
+  background: var(--color-background);
+  font-family: var(--font-display);
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--color-background);
+  scroll-behavior: auto;
+}
+
+body {
+  min-width: var(--page-width);
+  margin: 0;
+  background: var(--color-background);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+p,
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+.page-shell {
+  width: 100%;
+  min-height: 4122px;
+  overflow: hidden;
+  background: var(--color-background);
+}
+
+.fixed-content {
+  position: relative;
+  width: var(--content-width);
+  height: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.section-label {
+  color: var(--color-muted);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.56px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.hero {
+  height: 810px;
+  overflow: hidden;
+}
+
+/* Global header and timed first-load introduction (Figma 1010:1092, 1010:1267) */
+.case-study-scroll-progress {
+  position: fixed;
+  z-index: 125;
+  top: 50%;
+  left: 14px;
+  box-sizing: border-box;
+  width: 10px;
+  height: 112px;
+  padding: 3px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.56);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.16);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-26px, -50%);
+  transition: opacity 180ms ease, transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.case-study-scroll-progress.is-visible {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+.case-study-scroll-progress-track {
+  position: relative;
+  display: block;
+  width: 4px;
+  height: 100%;
+  overflow: hidden;
+  border-radius: inherit;
+  background: transparent;
+}
+
+.case-study-scroll-progress-fill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.28);
+  transform-origin: top center;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-study-scroll-progress {
+    transition: none;
+  }
+}
+
+.global-header {
+  position: fixed;
+  z-index: 20;
+  top: 24px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 1312px;
+  height: 55px;
+  padding: 0 16px;
+  color: var(--color-text);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: normal;
+  white-space: nowrap;
+  pointer-events: none;
+  transform: translateX(-50%);
+  transition:
+    color 180ms ease,
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.global-header.is-case-study {
+  color: var(--color-surface);
+}
+
+.global-header.is-scrolled {
+  color: var(--color-text);
+}
+
+.global-header.is-scroll-hidden {
+  transform: translate(-50%, -112px);
+}
+
+.global-navigation-backdrop {
+  position: fixed;
+  z-index: 19;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 96px;
+  border-bottom: 1px solid rgb(16 16 16 / 6%);
+  background: rgb(255 255 255 / 60%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-100%);
+  transition:
+    opacity 220ms ease,
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.global-navigation-backdrop.is-visible:not(.is-hidden) {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.global-header-brand,
+.global-header-links,
+.global-header-links a {
+  pointer-events: auto;
+}
+
+.global-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.global-header-brand img {
+  display: block;
+  width: 43px;
+  height: 39px;
+  object-fit: contain;
+}
+
+.global-header-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.global-header-links a {
+  position: relative;
+}
+
+.global-header-links a::after {
+  position: absolute;
+  right: 0;
+  bottom: -5px;
+  left: 0;
+  height: 1px;
+  background: currentColor;
+  content: "";
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 360ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.global-header-links a:hover::after,
+.global-header-links a:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+.global-header-brand img,
+.global-header-brand span,
+.global-header-links {
+  opacity: 0;
+}
+
+.global-header-brand span,
+.global-header-links {
+  clip-path: inset(0 100% 0 0);
+  will-change: clip-path, opacity;
+}
+
+.global-header.is-brand-visible .global-header-brand span,
+.global-header.is-links-visible .global-header-links,
+.global-header.is-complete .global-header-brand span,
+.global-header.is-complete .global-header-links {
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+  transition:
+    clip-path 430ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 260ms ease-out;
+}
+
+.global-header.is-complete .global-header-brand img {
+  opacity: 1;
+}
+
+.global-header.is-complete .global-header-links {
+  clip-path: none;
+  overflow: visible;
+}
+
+.site-intro {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  min-width: var(--page-width);
+  overflow: hidden;
+  background: var(--color-background);
+  transition: background-color 1350ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.site-intro-portrait {
+  position: absolute;
+  top: 303px;
+  left: calc(50% - 81.5px);
+  display: block;
+  width: 163px;
+  height: 145px;
+  object-fit: contain;
+  opacity: 0;
+  animation: site-intro-portrait-in 550ms ease-out forwards;
+  transition:
+    top 1350ms cubic-bezier(0.4, 0, 0.2, 1),
+    left 1350ms cubic-bezier(0.4, 0, 0.2, 1),
+    width 1350ms cubic-bezier(0.4, 0, 0.2, 1),
+    height 1350ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.site-intro-greeting {
+  position: absolute;
+  top: 472px;
+  left: 50%;
+  width: 761px;
+  color: var(--color-text);
+  font-family: "Inter", var(--font-display);
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  transform: translateX(-50%);
+  transition: opacity 380ms ease-out, transform 380ms ease-out;
+}
+
+.site-intro-caret {
+  display: inline-block;
+  width: 2px;
+  height: 0.82em;
+  margin-left: 4px;
+  background: currentColor;
+  vertical-align: -0.05em;
+  animation: site-intro-caret-blink 700ms steps(1, end) infinite;
+}
+
+.site-intro.is-entering .site-intro-caret {
+  opacity: 0;
+}
+
+.site-intro.is-docking,
+.site-intro.is-brand,
+.site-intro.is-links {
+  background: rgb(246 246 246 / 0%);
+  pointer-events: none;
+}
+
+.site-intro.is-docking .site-intro-portrait,
+.site-intro.is-brand .site-intro-portrait,
+.site-intro.is-links .site-intro-portrait {
+  top: 32px;
+  left: calc(50% - 640px);
+  width: 43px;
+  height: 39px;
+  opacity: 1;
+  animation: none;
+}
+
+.site-intro.is-greeting-out .site-intro-greeting,
+.site-intro.is-docking .site-intro-greeting,
+.site-intro.is-brand .site-intro-greeting,
+.site-intro.is-links .site-intro-greeting {
+  opacity: 0;
+  transform: translate(-50%, -8px);
+}
+
+@keyframes site-intro-portrait-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes site-intro-caret-blink {
+  0%, 45% { opacity: 1; }
+  46%, 100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .global-header-brand img,
+  .global-header-brand span,
+  .global-header-links,
+  .site-intro,
+  .site-intro-portrait,
+  .site-intro-greeting {
+    animation: none;
+    transition: none;
+  }
+}
+
+.navigation {
+  position: absolute;
+  top: 39px;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 1280px;
+  height: 25px;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: normal;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 187px;
+}
+
+.brand { width: 175px; }
+.nav-links a:first-child { width: 92px; }
+.nav-links a:last-child { width: 75px; }
+
+.hero-model {
+  position: absolute;
+  z-index: 0;
+  top: 147.59px;
+  left: 846.828px;
+  width: 347.041px;
+  height: 412.827px;
+  overflow: visible;
+  pointer-events: none;
+  animation: homepage-media-fade-in 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-model-stage {
+  position: absolute;
+  top: 0;
+  left: -60.6%;
+  width: 211.48%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.hero-model-stage canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-banner {
+  position: absolute;
+  top: 263px;
+  left: 0;
+  width: 1280px;
+  height: 483px;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  width: 761px;
+  height: 229px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 600ms ease-out,
+    transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.hero.is-copy-visible .intro {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.metadata {
+  display: flex;
+  align-items: center;
+  gap: 38px;
+  height: 23px;
+  color: var(--color-muted);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.intro h1 {
+  width: 761px;
+  font-size: 64px;
+  font-weight: 500;
+  line-height: 1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.intro h1 span {
+  display: block;
+  white-space: nowrap;
+}
+
+.intro h1 em,
+.expertise-content > h2 em {
+  color: var(--color-accent);
+  font-style: normal;
+  font-weight: 600;
+}
+
+.dynamic-hero-word {
+  display: inline-block;
+  min-width: 3.35em;
+}
+
+.dynamic-hero-word::after {
+  display: inline-block;
+  width: 0.04em;
+  height: 0.9em;
+  margin-left: 0.05em;
+  background: currentColor;
+  content: "";
+  opacity: 0;
+  transform: translateY(0.1em);
+}
+
+.dynamic-hero-word.is-typing::after {
+  opacity: 1;
+}
+
+.clients {
+  position: absolute;
+  top: 395px;
+  left: 0;
+  width: 1280px;
+  height: 88px;
+  animation: homepage-media-fade-in 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes homepage-media-fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro {
+    transition: none;
+  }
+
+  .hero-model,
+  .clients {
+    animation: none;
+  }
+}
+
+.clients > .section-label {
+  height: 18px;
+}
+
+.logo-row {
+  position: absolute;
+  top: 34px;
+  left: 0;
+  width: 1280px;
+  height: 54px;
+  overflow: hidden;
+}
+
+.logo-track {
+  display: flex;
+  width: max-content;
+  height: 54px;
+  will-change: transform;
+}
+
+.logo-set {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 42px;
+  height: 54px;
+  padding: 4px 42px 4px 0;
+}
+
+.logo-slot {
+  position: relative;
+  flex: 0 0 auto;
+  height: 46.077px;
+  overflow: hidden;
+}
+
+.logo-crop,
+.logo-crop img {
+  position: absolute;
+}
+
+.logo-crop img {
+  filter: grayscale(100%);
+  opacity: 0.8;
+}
+
+.adobe { width: 136.037px; }
+.adobe .logo-crop { top: 7.241px; left: 7.021px; width: 121.654px; height: 32.124px; }
+.adobe img { inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+.walmart { width: 147.447px; }
+.walmart .logo-crop { top: 7.241px; left: 6.144px; width: 135.243px; height: 32.015px; }
+.walmart img { inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+.astrazeneca { width: 139.548px; }
+.astrazeneca .logo-crop { top: 1.097px; left: 3.949px; width: 132.094px; height: 32.033px; }
+.astrazeneca img { inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+.darden { width: 133.404px; }
+.darden .logo-crop { top: 7.241px; left: 3.072px; width: 127.598px; height: 32.06px; overflow: hidden; }
+.darden img { top: -116.67%; left: -13.07%; width: 125.63%; height: 333.33%; max-width: none; }
+
+.gilead { width: 136.476px; }
+.gilead .logo-crop { top: 7.241px; left: 11.848px; width: 115.851px; height: 32.035px; }
+.gilead img { inset: 0; width: 115.851px; height: 32.035px; }
+
+.virginia { width: 169.388px; }
+.virginia .logo-crop { top: 7.241px; left: 7.021px; width: 154.857px; height: 32.136px; }
+.virginia img { inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+.ajio { width: 93.032px; }
+.ajio .logo-crop { top: 12.068px; left: 7.899px; width: 77.234px; height: 22.38px; }
+.ajio img { inset: 0; width: 77.226px; height: 22.186px; }
+
+.nfc { width: 71.529px; }
+.nfc .logo-crop { top: 2.852px; left: 11.41px; width: 48.856px; height: 40.69px; overflow: hidden; }
+.nfc img { top: -19.9%; left: -7.64%; width: 115.27%; height: 138.41%; max-width: none; }
+
+.isic { width: 71.529px; }
+.isic .logo-crop { top: 2.852px; left: 3.949px; width: 64.103px; height: 41.667px; overflow: hidden; }
+.isic img { top: -8.97%; left: -0.24%; width: 100.48%; height: 117.95%; max-width: none; }
+
+.miheso { width: 128.577px; }
+.miheso .logo-crop { top: 7.241px; left: 8.777px; width: 111.122px; height: 32.445px; overflow: hidden; }
+.miheso img { top: -75.6%; left: -14.6%; width: 129.2%; height: 251.21%; max-width: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-track {
+    transform: none !important;
+  }
+
+  .project-card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .dynamic-hero-word::after {
+    display: none;
+  }
+}
+
+.work {
+  height: 2093px;
+}
+
+.work-content {
+  padding-top: 64px;
+}
+
+.work-content > .section-label {
+  width: 1280px;
+  height: 18px;
+  font-size: 14px;
+}
+
+.project-grid {
+  position: absolute;
+  top: 114px;
+  left: 0;
+  width: 1280px;
+  height: 1915px;
+}
+
+.project-card {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 586px;
+  height: 519px;
+  opacity: var(--project-float-opacity, 1);
+  transform: translate3d(0, var(--project-float-y, 0), 0);
+  will-change: transform, opacity;
+}
+
+.project-card:hover {
+  cursor: none;
+}
+
+.project-hover-cursor {
+  position: absolute;
+  z-index: 5;
+  top: var(--project-cursor-y, 50%);
+  left: var(--project-cursor-x, 50%);
+  display: flex;
+  align-items: center;
+  width: 135px;
+  height: 39px;
+  padding-left: 21px;
+  overflow: hidden;
+  border-radius: 6px;
+  background: rgba(52, 52, 52, 0.7);
+  backdrop-filter: blur(6.5px);
+  color: #fff;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: normal;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  visibility: hidden;
+}
+
+.project-hover-cursor.is-coming-soon {
+  width: auto;
+  padding: 0 21px;
+  white-space: nowrap;
+}
+
+.project-card:hover .project-hover-cursor {
+  opacity: 1;
+  visibility: visible;
+}
+
+.page-shell.is-leaving::after {
+  position: fixed;
+  z-index: 30;
+  inset: 0;
+  background: rgba(246, 246, 246, 0.78);
+  content: "";
+  pointer-events: none;
+  animation: project-page-wash 300ms cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+
+.project-card.is-opening {
+  z-index: 31;
+}
+
+.project-card.is-opening .project-image {
+  transform: scale(1.035);
+  transition-duration: 650ms;
+}
+
+.project-card.is-opening .project-info {
+  transform: translateY(4px);
+  transition: transform 650ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.case-page-transition {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  background: #d7003a;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.case-page-transition.leaving {
+  transform: scaleX(0);
+  transform-origin: right center;
+  animation: case-transition-cover 470ms 180ms cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+
+.case-page-transition.revealing {
+  transform: scaleX(1);
+  transform-origin: left center;
+  animation: case-transition-reveal 620ms cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+
+@keyframes project-page-wash {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes case-transition-cover {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes case-transition-reveal {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(0); }
+}
+
+.left-one { top: 0; left: 0; }
+.right-one { top: 66px; left: 694px; }
+.left-two { top: 665px; left: 0; }
+.right-two { top: 731px; left: 694px; }
+.left-three { top: 1330px; left: 0; }
+.right-three { top: 1396px; left: 694px; }
+
+.project-image {
+  flex: 0 0 auto;
+  width: 586px;
+  height: 418px;
+  overflow: hidden;
+  background: var(--color-surface);
+  transform: scale(1);
+  transition:
+    box-shadow 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.029);
+}
+
+.project-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card.left-one .project-image,
+.project-card.left-one:hover .project-image,
+.project-card.left-one.is-opening .project-image,
+.project-card.right-one .project-image,
+.project-card.right-one:hover .project-image,
+.project-card.left-two .project-image,
+.project-card.left-two:hover .project-image,
+.project-card.right-two .project-image,
+.project-card.right-two:hover .project-image,
+.project-card.left-three .project-image,
+.project-card.left-three:hover .project-image,
+.project-card.right-three .project-image,
+.project-card.right-three:hover .project-image {
+  transform: none;
+}
+
+.project-card.left-one:hover .project-image {
+  box-shadow:
+    0 22px 48px rgba(31, 119, 153, 0.2),
+    0 10px 24px rgba(112, 75, 45, 0.14);
+}
+
+.project-card.right-one:hover .project-image {
+  box-shadow:
+    0 22px 48px rgba(31, 57, 116, 0.24),
+    0 10px 24px rgba(103, 120, 177, 0.14);
+}
+
+.project-card.left-two:hover .project-image {
+  box-shadow:
+    0 22px 48px rgba(52, 116, 84, 0.2),
+    0 10px 24px rgba(116, 105, 82, 0.16);
+}
+
+.project-card.right-two:hover .project-image {
+  box-shadow:
+    0 22px 48px rgba(18, 113, 164, 0.22),
+    0 10px 24px rgba(35, 38, 42, 0.18);
+}
+
+.project-card.left-three:hover .project-image {
+  box-shadow:
+    0 22px 48px rgba(92, 61, 39, 0.24),
+    0 10px 24px rgba(41, 28, 20, 0.16);
+}
+
+.project-card.right-three:hover .project-image {
+  box-shadow:
+    0 22px 48px rgba(92, 111, 60, 0.22),
+    0 10px 24px rgba(134, 91, 51, 0.16);
+}
+
+.project-card.left-one:hover .project-image img,
+.project-card.left-one.is-opening .project-image img,
+.project-card.right-one:hover .project-image img,
+.project-card.left-two:hover .project-image img,
+.project-card.right-two:hover .project-image img,
+.project-card.left-three:hover .project-image img,
+.project-card.right-three:hover .project-image img {
+  transform: scale(1.035);
+}
+
+.project-card.left-one.is-opening .project-image img {
+  transition-duration: 650ms;
+}
+
+.project-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 586px;
+  height: 77px;
+}
+
+.project-info h3,
+.expertise-item h3 {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.project-details {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.project-details > p,
+.expertise-item p {
+  color: var(--color-muted);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.project-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 10px;
+  color: var(--color-subtle);
+  font-size: 8px;
+  font-weight: 400;
+  line-height: normal;
+  opacity: 0;
+  text-transform: uppercase;
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.project-card:hover .project-tags {
+  opacity: 1;
+}
+
+.tag-group {
+  display: contents;
+}
+
+.project-tags img {
+  display: block;
+  width: 1px;
+  height: 8px;
+}
+
+.expertise {
+  height: 758px;
+}
+
+.expertise-content {
+  padding-top: 64px;
+}
+
+.expertise-content > h2 {
+  width: 628px;
+  height: 162px;
+  font-size: 54px;
+  font-weight: 500;
+  line-height: 1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.expertise-content > h2 > span {
+  display: block;
+  white-space: nowrap;
+}
+
+.expertise-grid {
+  position: absolute;
+  top: 300px;
+  left: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 197px);
+  width: 1280px;
+  height: 394px;
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.expertise-rule {
+  position: absolute;
+  z-index: 3;
+  display: block;
+  pointer-events: none;
+}
+
+.expertise-rule.vertical {
+  top: 0;
+  width: 1px;
+  height: 393px;
+}
+
+.expertise-rule.vertical.one { left: 425px; }
+.expertise-rule.vertical.two { left: 851px; }
+
+.expertise-rule.horizontal {
+  top: 196px;
+  left: 0;
+  width: 1px;
+  height: 1280px;
+  transform: translateY(1px) rotate(-90deg);
+  transform-origin: top left;
+}
+
+.expertise-item {
+  position: relative;
+  z-index: 1;
+  padding: 86px 27px 0;
+  transition: background-color 180ms ease-out;
+}
+
+.expertise-item:hover {
+  background-color: #1a1a1a;
+}
+
+.expertise-icon {
+  position: absolute;
+  top: 25px;
+  left: 27px;
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease-out;
+}
+
+.expertise-item:hover .expertise-icon {
+  opacity: 1;
+}
+
+.expertise-item:nth-of-type(n + 4) {
+  padding-top: 86px;
+}
+
+.expertise-item h3 {
+  width: 350px;
+  height: 24px;
+  transition: color 180ms ease-out;
+}
+
+.expertise-item:hover h3 {
+  color: #fff;
+}
+
+.expertise-item p {
+  width: 350px;
+  margin-top: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .expertise-item,
+  .expertise-icon,
+  .expertise-item h3 {
+    transition: none;
+  }
+}
+
+.footer {
+  height: 461px;
+  background: var(--color-footer);
+}
+
+.footer-content {
+  font-family: var(--font-display);
+}
+
+.contact-statement {
+  position: absolute;
+  top: 70px;
+  left: 0;
+  width: 628px;
+  height: 108px;
+  font-size: 54px;
+  font-weight: 500;
+  line-height: 1;
+  color: #ffffff;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.contact-statement > span {
+  display: block;
+  white-space: nowrap;
+}
+
+.contact-statement > span:last-child {
+  color: var(--color-muted);
+}
+
+.footer-word-rotator {
+  display: inline-grid;
+  height: 1em;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.footer-rotating-word {
+  grid-area: 1 / 1;
+  display: block;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(150%);
+  transition:
+    opacity 450ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.footer-rotating-word.is-active,
+.footer-rotating-word.is-exiting {
+  visibility: visible;
+}
+
+.footer-rotating-word.is-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.footer-rotating-word.is-exiting {
+  opacity: 0;
+  transform: translateY(-150%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-rotating-word {
+    transition: none;
+  }
+}
+
+.contact-button {
+  position: absolute;
+  top: 218px;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 278px;
+  height: 66px;
+  border-radius: 106px;
+  background: #ffffff;
+  color: #101010;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.social-links {
+  position: absolute;
+  top: 218px;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+  width: 115px;
+  height: 67px;
+}
+
+.social-links > .section-label {
+  width: 115px;
+}
+
+.social-icons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.social-icons a,
+.social-icons img {
+  display: block;
+  width: 32px;
+  height: 32px;
+}
+
+.copyright,
+.credit {
+  position: absolute;
+  top: 406px;
+  color: var(--color-muted);
+  font-family: var(--font-system);
+  font-size: 14px;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.copyright { left: 0; }
+.credit { right: 0; text-align: right; }
+
+/* Fortune 500 biopharma case study — fixed 1440px Figma frame */
+.case-page {
+  width: 100%;
+  min-width: 1440px;
+  overflow: hidden;
+  background: #f6f6f6;
+  color: #101010;
+}
+
+.case-fixed,
+.case-fixed-section {
+  position: relative;
+  width: 1440px;
+  margin: 0 auto;
+}
+
+.case-hero {
+  position: relative;
+  width: 1440px;
+  height: 1290px;
+  margin: 0 auto;
+}
+
+.case-hero-red {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1440px;
+  height: 367px;
+  background: #d7003a;
+}
+
+.case-navigation {
+  position: absolute;
+  z-index: 2;
+  top: 39px;
+  left: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 1280px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: normal;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.case-navigation > div {
+  display: flex;
+  gap: 20px;
+}
+
+.case-project-toggle {
+  position: fixed;
+  z-index: 20;
+  top: 24px;
+  left: 50vw;
+  display: grid;
+  box-sizing: border-box;
+  width: 252px;
+  height: 48px;
+  padding: 4px;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid rgb(16 16 16 / 12%);
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.16px;
+  transform: translateX(-50%);
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.global-case-project-toggle.is-scroll-hidden {
+  transform: translate(-50%, -112px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .global-header,
+  .global-navigation-backdrop,
+  .case-project-toggle,
+  .global-header-links a::after {
+    transition: none;
+  }
+}
+
+.project-view-toggle-indicator {
+  position: absolute;
+  z-index: 0;
+  top: 4px;
+  left: 4px;
+  width: 121px;
+  height: 38px;
+  border-radius: 999px;
+  background: #101010;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 18%);
+  transform: translateX(0);
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.project-view-toggle.is-detail .project-view-toggle-indicator {
+  transform: translateX(121px);
+}
+
+.project-view-toggle-option {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  border-radius: 999px;
+  color: #606060;
+  transition: color 180ms ease;
+}
+
+.project-view-toggle-option:hover { color: #101010; }
+.project-view-toggle-option.is-active { color: #fff; }
+.project-view-toggle-option:focus-visible {
+  outline: 2px solid #6a71e6;
+  outline-offset: 2px;
+}
+
+.project-view-toggle-detail.is-coming-soon {
+  cursor: none;
+}
+
+.project-view-toggle-coming-soon {
+  position: absolute;
+  z-index: 3;
+  top: var(--toggle-cursor-y, 50%);
+  left: var(--toggle-cursor-x, 50%);
+  display: flex;
+  align-items: center;
+  height: 39px;
+  padding: 0 21px;
+  border-radius: 6px;
+  background: rgba(52, 52, 52, 0.7);
+  backdrop-filter: blur(6.5px);
+  color: #fff;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: normal;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  visibility: hidden;
+  white-space: nowrap;
+}
+
+.project-view-toggle-detail.is-coming-soon:hover .project-view-toggle-coming-soon {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* First-visit project navigation guide (Figma 1008:964) */
+.project-onboarding {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  min-width: var(--page-width);
+  min-height: 100vh;
+  color: #fff;
+  animation: project-onboarding-enter 180ms ease-out both;
+  outline: none;
+}
+
+.project-onboarding-spotlight {
+  position: absolute;
+  z-index: 1;
+  top: 24px;
+  left: 50%;
+  width: 252px;
+  height: 48px;
+  border-radius: 999px;
+  outline: 2px solid rgb(255 255 255 / 65%);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 200vmax rgb(0 0 0 / 84%);
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.project-onboarding-arrow {
+  position: absolute;
+  z-index: 2;
+  top: 91px;
+  left: calc(50% - 196px);
+  display: block;
+  width: 92px;
+  height: 20px;
+  opacity: 0.72;
+  transform: rotate(-34deg) scaleX(-1);
+  transform-origin: center;
+}
+
+.project-onboarding-card {
+  position: absolute;
+  z-index: 2;
+  top: 118px;
+  left: calc(50% - 196px);
+  box-sizing: border-box;
+  width: 392px;
+  min-height: 132px;
+  padding: 20px;
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 20px;
+  background: #101010;
+  box-shadow: 0 18px 50px rgb(0 0 0 / 28%);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0.15px;
+}
+
+.project-onboarding-card p {
+  width: 286px;
+  margin: 0;
+  color: #b8b8b8;
+}
+
+.project-onboarding-card button {
+  position: relative;
+  display: block;
+  height: 34px;
+  margin: 18px 0 0 auto;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 999px;
+  outline-offset: 4px;
+  background: #fff;
+  color: #101010;
+  font: inherit;
+  cursor: pointer;
+}
+
+.project-onboarding-card button:hover { background: #ececec; }
+
+@keyframes project-onboarding-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-onboarding { animation: none; }
+}
+
+/* Fortune 500 biopharma in-detail — section 1: hero (Figma 974:13481) */
+.case-detail-page {
+  width: 100%;
+  min-width: var(--page-width);
+  overflow: hidden;
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+.detail-hero {
+  position: relative;
+  width: var(--page-width);
+  height: 1333px;
+  margin: 0 auto;
+  background: var(--color-background);
+}
+
+.detail-hero-red {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: var(--page-width);
+  height: 367px;
+  background: #d7003a;
+}
+
+.detail-hero > h1 {
+  position: absolute;
+  top: 142px;
+  left: 80px;
+  width: 909px;
+  color: var(--color-surface);
+  font-size: 54px;
+  font-weight: 500;
+  line-height: 1.1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-hero-image-area {
+  position: absolute;
+  top: 367px;
+  left: 0;
+  width: var(--page-width);
+  height: 742px;
+  overflow: hidden;
+}
+
+.detail-hero-image-frame {
+  position: absolute;
+  top: 52px;
+  left: 154px;
+  width: 1132px;
+  height: 638px;
+  overflow: hidden;
+  border: 10px solid #000;
+  border-radius: 12px;
+  background: #000;
+}
+
+.detail-hero-image-frame img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.detail-project-meta {
+  position: absolute;
+  top: 1157px;
+  left: 80px;
+  width: 1279.374px;
+  height: 101px;
+}
+
+.detail-meta-column {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 16px;
+  line-height: normal;
+}
+
+.detail-meta-role {
+  top: 0;
+  left: 0;
+  width: 288px;
+  height: 101px;
+  gap: 13px;
+}
+
+.detail-meta-scope {
+  top: 0.5px;
+  left: 402px;
+  width: 409.96px;
+  height: 100px;
+}
+
+.detail-meta-scale {
+  top: 6.5px;
+  left: 925.96px;
+  width: 353.414px;
+  height: 88px;
+}
+
+.detail-meta-column > strong {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.96px;
+  text-transform: uppercase;
+}
+
+.detail-meta-column > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  letter-spacing: 0.32px;
+}
+
+.detail-meta-column b {
+  color: var(--color-muted);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.detail-meta-column p {
+  color: var(--color-subtle);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.detail-meta-role > div { width: 288px; }
+.detail-meta-scope > div { width: 376px; }
+.detail-meta-scale > div {
+  width: 353.414px;
+  height: 56px;
+}
+
+.detail-meta-divider {
+  position: absolute;
+  top: 10.75px;
+  display: block;
+  width: 1px;
+  height: 79.5px;
+}
+
+.detail-meta-divider-one { left: 345px; }
+.detail-meta-divider-two { left: 868.96px; }
+
+/* Fortune 500 biopharma in-detail — section 2: project overview (Figma 974:13516) */
+.detail-project-overview {
+  position: relative;
+  width: var(--page-width);
+  height: 223px;
+  margin: 0 auto;
+  background: var(--color-background);
+}
+
+.detail-project-overview > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-project-overview > p {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  width: 954px;
+  color: var(--color-muted);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+/* Fortune 500 biopharma in-detail — section 3: problem (Figma 974:13520) */
+.detail-problem {
+  position: relative;
+  width: var(--page-width);
+  height: 486px;
+  margin: 0 auto;
+  background: var(--color-background);
+}
+
+.detail-problem > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-problem-intro {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  width: 540px;
+  color: var(--color-muted);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-problem-group {
+  position: absolute;
+  top: 170px;
+  height: 236px;
+}
+
+.detail-problem-user {
+  left: 406px;
+  width: 411px;
+}
+
+.detail-problem-business {
+  left: 925px;
+  width: 410px;
+}
+
+.detail-problem-group > h3 {
+  height: 28px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: 0.4px;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-problem-list {
+  position: absolute;
+  top: 56px;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+
+.detail-problem-list article {
+  height: 74px;
+}
+
+.detail-problem-list h4 {
+  height: 20px;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.36px;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-problem-list p {
+  margin-top: 12px;
+  color: var(--color-muted);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-problem-maintenance {
+  width: 340px;
+}
+
+/* Fortune 500 biopharma in-detail — section 4: design challenge (Figma 953:2770) */
+.detail-design-challenge {
+  position: relative;
+  width: var(--page-width);
+  height: 372px;
+  margin: 0 auto;
+  background: #d7003a;
+  color: var(--color-surface);
+}
+
+.detail-design-challenge > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-design-challenge > p {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  width: 954px;
+  font-size: 48px;
+  font-weight: 200;
+  line-height: 1.1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+/* Fortune 500 biopharma in-detail — section 5: discovery and audit (Figma 953:2838) */
+.detail-discovery {
+  position: relative;
+  width: var(--page-width);
+  height: 942px;
+  margin: 0 auto;
+  background: var(--color-background);
+}
+
+.detail-discovery > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 135px;
+  height: 68px;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-discovery-intro {
+  position: absolute;
+  top: 104px;
+  left: 406px;
+  width: 954px;
+  color: var(--color-muted);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-discovery > h3 {
+  position: absolute;
+  left: 406px;
+  width: 226px;
+  height: 28px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: 0.4px;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-discovery-strengths-title { top: 200px; }
+.detail-discovery-weaknesses-title { top: 555px; }
+
+.detail-discovery-card {
+  position: absolute;
+  width: 302px;
+  height: 255px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--color-surface);
+}
+
+.detail-discovery-card-one,
+.detail-discovery-card-four { left: 406px; }
+
+.detail-discovery-card-two,
+.detail-discovery-card-five { left: 732px; }
+
+.detail-discovery-card-three,
+.detail-discovery-card-six { left: 1058px; }
+
+.detail-discovery-card-one,
+.detail-discovery-card-two,
+.detail-discovery-card-three { top: 252px; }
+
+.detail-discovery-card-four,
+.detail-discovery-card-five,
+.detail-discovery-card-six { top: 607px; }
+
+.detail-discovery-card h4 {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  height: 20px;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.36px;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-discovery-card p {
+  position: absolute;
+  top: 139px;
+  left: 32px;
+  width: 237px;
+  color: var(--color-muted);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-discovery-card-wide-copy p { width: 246px; }
+
+/* Fortune 500 biopharma in-detail — section 6: key takeaway (Figma 953:2889) */
+.detail-key-takeaway {
+  position: relative;
+  width: var(--page-width);
+  height: 425px;
+  margin: 0 auto;
+  background: #d7003a;
+  color: var(--color-surface);
+}
+
+.detail-key-takeaway > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 180px;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-key-takeaway > p {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  width: 954px;
+  font-size: 48px;
+  font-weight: 200;
+  line-height: 1.1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+/* Fortune 500 biopharma in-detail — section 7: stakeholder alignment (Figma 953:2935) */
+.detail-stakeholder {
+  position: relative;
+  width: var(--page-width);
+  height: 706px;
+  margin: 0 auto;
+  background: var(--color-background);
+}
+
+.detail-stakeholder > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 217px;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-stakeholder-copy {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  width: 954px;
+  color: var(--color-muted);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-stakeholder-copy p + p {
+  margin-top: 0;
+}
+
+.detail-stakeholder-copy p:last-child {
+  margin-top: 21px;
+}
+
+.detail-stakeholder-gallery {
+  position: absolute;
+  top: 239px;
+  left: 406px;
+  display: flex;
+  gap: 24px;
+  width: 954px;
+  height: 347px;
+}
+
+.detail-stakeholder-image {
+  position: relative;
+  width: 302px;
+  height: 347px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 12px;
+  background: #fff;
+  cursor: zoom-in;
+}
+
+.detail-stakeholder-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detail-stakeholder-image:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+.detail-stakeholder-hint {
+  position: absolute;
+  top: 605px;
+  left: 774px;
+  width: 218px;
+  color: var(--color-muted);
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.3;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+/* Fortune 500 biopharma in-detail — section 8: stakeholder takeaways (Figma 953:2967) */
+.detail-stakeholder-takeaways {
+  position: relative;
+  width: var(--page-width);
+  height: 658px;
+  margin: 0 auto;
+  background: var(--color-surface);
+}
+
+.detail-stakeholder-takeaways > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 193px;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-takeaway-divider {
+  position: absolute;
+  left: 80px;
+  width: 1280px;
+  height: 1px;
+}
+
+.detail-takeaway-divider-one { top: 138px; }
+.detail-takeaway-divider-two { top: 254px; }
+.detail-takeaway-divider-three { top: 370px; }
+.detail-takeaway-divider-four { top: 486px; }
+
+.detail-takeaway-row {
+  position: absolute;
+  left: 80px;
+  width: 1280px;
+  height: 68px;
+  color: var(--color-muted);
+}
+
+.detail-takeaway-row-one { top: 162px; }
+.detail-takeaway-row-two { top: 278px; }
+.detail-takeaway-row-three { top: 394px; }
+.detail-takeaway-row-four { top: 510px; }
+
+.detail-takeaway-row b {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-takeaway-row p {
+  position: absolute;
+  top: 0;
+  left: 326px;
+  width: 954px;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.2;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-takeaway-row p span {
+  color: #d7003a;
+}
+
+/* Fortune 500 biopharma in-detail — section 9: design implication (Figma 953:2987) */
+.detail-design-implication {
+  position: relative;
+  width: var(--page-width);
+  height: 319px;
+  margin: 0 auto;
+  background: #d7003a;
+  color: var(--color-surface);
+}
+
+.detail-design-implication > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 241px;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-design-implication > p {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  width: 954px;
+  font-size: 48px;
+  font-weight: 200;
+  line-height: 1.1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+/* Fortune 500 biopharma in-detail — section 10: experience strategy (Figma 953:3053) */
+.detail-experience-strategy {
+  position: relative;
+  width: var(--page-width);
+  height: 415px;
+  margin: 0 auto;
+  background: var(--color-background);
+}
+
+.detail-experience-strategy > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 217px;
+  color: var(--color-text);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-strategy-principles {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  display: grid;
+  grid-template-columns: repeat(3, 302px);
+  gap: 24px;
+}
+
+.detail-strategy-principle {
+  position: relative;
+  width: 302px;
+  height: 255px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--color-surface);
+}
+
+.detail-strategy-principle h3 {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  color: var(--color-text);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.36px;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-strategy-principle p {
+  position: absolute;
+  top: 139px;
+  left: 32px;
+  width: 237px;
+  color: var(--color-muted);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+/* Fortune 500 biopharma in-detail — section 11: strategic decisions (Figma 953:3094) */
+.detail-strategic-decisions {
+  position: relative;
+  width: var(--page-width);
+  height: 658px;
+  margin: 0 auto;
+  background: var(--color-surface);
+}
+
+.detail-strategic-decisions > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 250px;
+  color: var(--color-text);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-decision-divider {
+  position: absolute;
+  left: 80px;
+  width: 1280px;
+  height: 1px;
+}
+
+.detail-decision-divider-one { top: 138px; }
+.detail-decision-divider-two { top: 254px; }
+.detail-decision-divider-three { top: 370px; }
+.detail-decision-divider-four { top: 486px; }
+
+.detail-decision-row {
+  position: absolute;
+  left: 80px;
+  width: 1280px;
+  height: 68px;
+  color: var(--color-muted);
+}
+
+.detail-decision-row-one { top: 162px; }
+.detail-decision-row-two { top: 278px; }
+.detail-decision-row-three { top: 394px; }
+.detail-decision-row-four { top: 510px; }
+
+.detail-decision-row b {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-decision-row p {
+  position: absolute;
+  top: 0;
+  left: 326px;
+  width: 954px;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.2;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+/* Fortune 500 biopharma in-detail — section 12: information architecture (Figma 953:3303) */
+.detail-information-architecture {
+  position: relative;
+  width: var(--page-width);
+  height: 798px;
+  margin: 0 auto;
+  background: var(--color-background);
+}
+
+.detail-information-architecture > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 217px;
+  color: var(--color-text);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-ia-intro {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  width: 954px;
+  color: var(--color-muted);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-ia-intro p + p {
+  margin-top: 21px;
+}
+
+.detail-ia-challenge-title {
+  position: absolute;
+  top: 218px;
+  left: 406px;
+  width: 226px;
+  color: var(--color-text);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: 0.4px;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-ia-card-grid {
+  position: absolute;
+  top: 270px;
+  left: 406px;
+  display: grid;
+  grid-template-columns: repeat(2, 465px);
+  grid-template-rows: repeat(2, 212px);
+  gap: 24px;
+}
+
+.detail-ia-card {
+  position: relative;
+  width: 465px;
+  height: 212px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--color-surface);
+}
+
+.detail-ia-card > h3 {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  color: var(--color-text);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.36px;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-ia-card ul {
+  position: absolute;
+  top: 76px;
+  left: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 401px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.detail-ia-card li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  min-height: 20px;
+  color: rgba(24, 29, 37, 0.7);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-ia-card li img {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+}
+
+.detail-ia-card li span {
+  width: 373px;
+}
+
+/* Fortune 500 biopharma in-detail — section 13: design approach (Figma 971:3679) */
+.detail-design-approach {
+  position: relative;
+  width: var(--page-width);
+  height: 508px;
+  margin: 0 auto;
+  background: var(--color-surface);
+}
+
+.detail-design-approach > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 224px;
+  color: var(--color-text);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-approach-divider {
+  position: absolute;
+  left: 80px;
+  width: 1280px;
+  height: 1px;
+}
+
+.detail-approach-divider-one { top: 138px; }
+.detail-approach-divider-two { top: 254px; }
+.detail-approach-divider-three { top: 370px; }
+
+.detail-approach-row {
+  position: absolute;
+  left: 80px;
+  width: 1280px;
+  height: 68px;
+  color: var(--color-muted);
+}
+
+.detail-approach-row-one { top: 162px; }
+.detail-approach-row-two { top: 278px; }
+.detail-approach-row-three { top: 394px; }
+
+.detail-approach-row b {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-approach-row p {
+  position: absolute;
+  top: 0;
+  left: 326px;
+  width: 954px;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.2;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+/* Fortune 500 biopharma in-detail — section 14: IA solution (Figma 971:3661) */
+.detail-ia-solution {
+  position: relative;
+  width: var(--page-width);
+  height: 1389px;
+  margin: 0 auto;
+  background: #d7003a;
+  color: var(--color-surface);
+}
+
+.detail-ia-solution > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 434px;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-ia-solution-map {
+  position: absolute;
+  top: 168px;
+  left: 80px;
+  width: 1280px;
+  height: 627px;
+  overflow: hidden;
+  border: 8px solid #000;
+  border-radius: 20px;
+  background: var(--color-surface);
+}
+
+.detail-ia-solution-map img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.detail-ia-solution-divider {
+  position: absolute;
+  left: 80px;
+  width: 1280px;
+  height: 1px;
+}
+
+.detail-ia-solution-divider-one { top: 951px; }
+.detail-ia-solution-divider-two { top: 1101px; }
+.detail-ia-solution-divider-three { top: 1217px; }
+
+.detail-ia-solution-row {
+  position: absolute;
+  left: 80px;
+  width: 1280px;
+  color: var(--color-surface);
+}
+
+.detail-ia-solution-row-one { top: 859px; }
+.detail-ia-solution-row-two { top: 975px; }
+.detail-ia-solution-row-three { top: 1125px; }
+.detail-ia-solution-row-four { top: 1241px; }
+
+.detail-ia-solution-row b {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-ia-solution-row p {
+  position: absolute;
+  top: 0;
+  left: 326px;
+  width: 954px;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.2;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+/* Fortune 500 biopharma in-detail — section 15: design system (Figma 971:5996) */
+.detail-design-system {
+  position: relative;
+  width: var(--page-width);
+  height: 2115px;
+  margin: 0 auto;
+  background: #f6f6f6;
+}
+
+.detail-design-system > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 217px;
+  color: var(--color-text);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-design-system-intro {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  width: 954px;
+  color: rgba(24, 29, 37, 0.7);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21px;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-design-system-intro p + p {
+  margin-top: 21px;
+}
+
+.detail-design-system-gallery {
+  position: absolute;
+  top: 239px;
+  left: 80px;
+  width: 1280px;
+  height: 1796.2285px;
+}
+
+.detail-design-system-image {
+  position: absolute;
+  display: block;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 8.362px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.detail-design-system-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.detail-design-system-image:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+.detail-design-system-primary,
+.detail-design-system-secondary,
+.detail-design-system-neutral,
+.detail-design-system-supporting {
+  background: rgba(106, 113, 230, 0.2);
+}
+
+.detail-design-system-primary {
+  top: 12.851px;
+  left: 12.852px;
+  width: 405.5668px;
+  height: 298.2px;
+}
+
+.detail-design-system-secondary {
+  top: 324px;
+  left: 12.852px;
+  width: 405.5668px;
+  height: 246.256px;
+}
+
+.detail-design-system-neutral {
+  top: 12.851px;
+  left: 437.2095px;
+  width: 405.5668px;
+  height: 557.404px;
+}
+
+.detail-design-system-supporting {
+  top: 12.851px;
+  left: 861.567px;
+  width: 405.581px;
+  height: 557.404px;
+}
+
+.detail-design-system-typography,
+.detail-design-system-iconography {
+  top: 614.1345px;
+  width: 619.095px;
+  height: 728.1702px;
+  background: rgba(106, 113, 230, 0.2);
+}
+
+.detail-design-system-typography { left: 0; }
+.detail-design-system-iconography { left: 660.905px; }
+
+.detail-design-system-buttons,
+.detail-design-system-dropdowns {
+  top: 1373.3317px;
+  width: 619.095px;
+  height: 422.8969px;
+  padding: 0;
+  background: #fff;
+}
+
+.detail-design-system-buttons { left: 0; }
+.detail-design-system-dropdowns { left: 660.905px; }
+
+.detail-design-system-buttons img,
+.detail-design-system-dropdowns img {
+  width: 100%;
+  height: 100%;
+  border-radius: 8.362px;
+}
+
+/* Fortune 500 biopharma in-detail — section 16: key UX interventions (Figma 971:10598) */
+.detail-interventions {
+  position: relative;
+  width: var(--page-width);
+  height: 12970px;
+  margin: 0 auto;
+  background: #f6f6f6;
+}
+
+.detail-interventions > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 217px;
+  color: var(--color-text);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-interventions-intro {
+  position: absolute;
+  top: 120px;
+  left: 406px;
+  width: 954px;
+  color: #606060;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-interventions-list {
+  position: absolute;
+  top: 196px;
+  left: 80px;
+  display: flex;
+  width: 1280px;
+  flex-direction: column;
+  gap: 51.406px;
+}
+
+.detail-intervention-card {
+  box-sizing: border-box;
+  display: flex;
+  width: 1280px;
+  flex: none;
+  flex-direction: column;
+  gap: 30.843px;
+  padding: 52.691px 32.128px;
+  overflow: hidden;
+  border: 1.285px solid #e8eaee;
+  border-radius: 15.422px;
+  background: #fff;
+}
+
+.detail-intervention-card.is-compact {
+  padding-top: 32.128px;
+  padding-bottom: 32.128px;
+}
+
+.detail-intervention-heading {
+  display: flex;
+  height: 34px;
+  flex: none;
+  align-items: center;
+}
+
+.detail-intervention-heading h3 {
+  color: #101010;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+  white-space: nowrap;
+}
+
+.detail-intervention-insights {
+  display: grid;
+  height: 137.554px;
+  flex: none;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20.562px;
+}
+
+.detail-intervention-insight {
+  box-sizing: border-box;
+  padding: 16.707px 21.847px;
+  border: 1.285px solid;
+  border-radius: 15.422px;
+}
+
+.detail-intervention-card.has-tight-insights .detail-intervention-insight:not(.is-result) {
+  padding-right: 16.707px;
+  padding-left: 16.707px;
+}
+
+.detail-intervention-insight strong {
+  display: block;
+  margin-bottom: 5.141px;
+  font-size: 12.851px;
+  font-weight: 700;
+  line-height: 20.884px;
+  letter-spacing: 0.643px;
+  text-transform: uppercase;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-intervention-insight p {
+  color: rgba(24, 29, 37, 0.7);
+  font-size: 17.992px;
+  font-weight: 400;
+  line-height: 25.703px;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-intervention-insight.is-problem {
+  border-color: #f6d5d5;
+  background: #fdecec;
+}
+
+.detail-intervention-insight.is-problem strong { color: #b62020; }
+
+.detail-intervention-insight.is-solution {
+  border-color: #c9e8d6;
+  background: #e7f8ee;
+}
+
+.detail-intervention-insight.is-solution strong { color: #267346; }
+
+.detail-intervention-insight.is-result {
+  border-color: #dbeafe;
+  background: #eff6ff;
+}
+
+.detail-intervention-insight.is-result strong { color: #1a5de6; }
+
+.detail-intervention-card > h4 {
+  height: 35.984px;
+  flex: none;
+  margin: 0;
+  color: #101010;
+  font-size: 25.703px;
+  font-weight: 400;
+  line-height: 35.984px;
+  letter-spacing: 0.514px;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-intervention-card.is-compact > h4 {
+  color: #181d25;
+}
+
+.detail-intervention-video,
+.detail-intervention-still {
+  position: relative;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  height: 647.711px;
+  flex: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1.285px solid #e8eaee;
+  border-radius: 15.422px;
+  background: #f8f8f8;
+}
+
+.detail-intervention-video {
+  cursor: pointer;
+}
+
+.detail-intervention-video video,
+.detail-intervention-still img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detail-intervention-still.is-header-before { height: 685.992px; }
+.detail-intervention-still.is-search-before { height: 445.944px; }
+.detail-intervention-still.is-medicines-before { height: 647.711px; }
+
+.detail-intervention-still.is-header-before img {
+  object-position: center bottom;
+}
+
+.detail-intervention-still.is-search-before img {
+  object-fit: fill;
+}
+
+.detail-intervention-video.is-pipeline-after {
+  width: 1190.04px;
+}
+
+.detail-intervention-video.is-pipeline-after .detail-intervention-play {
+  left: calc(50% + 12.53px);
+}
+
+.detail-intervention-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 130.442px;
+  height: 71.968px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+.detail-intervention-video:focus-visible {
+  outline: 3px solid #1a5de6;
+  outline-offset: 4px;
+}
+
+/* Fortune 500 biopharma in-detail — section 17: measurable change (Figma 971:13398) */
+.detail-measurable-change {
+  position: relative;
+  width: var(--page-width);
+  height: 714px;
+  margin: 0 auto;
+  background: #f6f6f6;
+}
+
+.detail-measurable-change > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 274px;
+  color: #101010;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-measurable-change-cards {
+  position: absolute;
+  top: 196px;
+  left: 80px;
+  display: grid;
+  width: 1280px;
+  height: 438px;
+  grid-template-columns: 316px 341px 575px;
+  gap: 24px;
+}
+
+.detail-measurable-change-card {
+  position: relative;
+  box-sizing: border-box;
+  height: 438px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.detail-measurable-change-value,
+.detail-measurable-change-label,
+.detail-measurable-change-level {
+  margin: 0;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-measurable-change-value {
+  position: absolute;
+  top: 42px;
+  left: 42px;
+  color: #d7003a;
+  font-size: 118px;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.detail-measurable-change-label {
+  position: absolute;
+  top: 370px;
+  left: 42px;
+  color: #101010;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: 0.32px;
+}
+
+.detail-measurable-change-card.is-navigation .detail-measurable-change-label { width: 232px; }
+.detail-measurable-change-card.is-stakeholders .detail-measurable-change-label { width: 257px; }
+.detail-measurable-change-card.is-accessibility .detail-measurable-change-label { width: 417px; }
+
+.detail-measurable-change-wcag {
+  position: absolute;
+  inset: 0;
+}
+
+.detail-measurable-change-level {
+  position: absolute;
+  top: 109px;
+  left: 413px;
+  color: #d7003a;
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Fortune 500 biopharma in-detail — section 18: testimonial (Figma 971:13414) */
+.detail-testimonial {
+  position: relative;
+  width: var(--page-width);
+  height: 682px;
+  margin: 0 auto;
+  background: #d7003a;
+  color: #fff;
+}
+
+.detail-testimonial-quote-mark {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  display: block;
+  width: 84px;
+  height: 84px;
+  transform: translateX(-50%);
+}
+
+.detail-testimonial blockquote {
+  position: absolute;
+  top: 204px;
+  left: 50%;
+  width: 1062px;
+  height: 322px;
+  margin: 0;
+  color: #fff;
+  font-size: 42px;
+  font-weight: 200;
+  line-height: 1.1;
+  text-align: center;
+  transform: translateX(-50%);
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.detail-testimonial-attribution {
+  position: absolute;
+  top: 580px;
+  left: 488px;
+  width: 464px;
+  margin: 0;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.workshop-lightbox {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  width: 100vw;
+  min-height: 700px;
+  overflow: hidden;
+  background: rgba(236, 238, 253, 0.98);
+}
+
+.workshop-lightbox button {
+  font: inherit;
+}
+
+.workshop-lightbox-close {
+  position: absolute;
+  z-index: 3;
+  top: 36px;
+  right: 42px;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(44, 46, 77, 0.08);
+  cursor: pointer;
+}
+
+.workshop-lightbox-close span::before,
+.workshop-lightbox-close span::after {
+  position: absolute;
+  top: 27px;
+  left: 18px;
+  width: 20px;
+  height: 2px;
+  background: #101010;
+  content: "";
+}
+
+.workshop-lightbox-close span::before { transform: rotate(45deg); }
+.workshop-lightbox-close span::after { transform: rotate(-45deg); }
+
+.workshop-lightbox-arrow {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  width: 70px;
+  height: 70px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 10px 34px rgba(44, 46, 77, 0.08);
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.workshop-lightbox-arrow-previous { left: 40px; }
+.workshop-lightbox-arrow-next { right: 40px; }
+
+.workshop-lightbox-arrow span {
+  position: absolute;
+  top: 25px;
+  width: 18px;
+  height: 18px;
+  border-top: 2px solid #101010;
+  border-right: 2px solid #101010;
+}
+
+.workshop-lightbox-arrow-previous span {
+  left: 29px;
+  transform: rotate(-135deg);
+}
+
+.workshop-lightbox-arrow-next span {
+  right: 29px;
+  transform: rotate(45deg);
+}
+
+.workshop-lightbox-close:focus-visible,
+.workshop-lightbox-arrow:focus-visible,
+.workshop-lightbox-thumbnails button:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+.workshop-lightbox-figure {
+  position: absolute;
+  top: 32px;
+  right: 150px;
+  bottom: 178px;
+  left: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 0;
+}
+
+.workshop-lightbox-stage {
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 22px 55px rgba(44, 46, 77, 0.12);
+}
+
+.workshop-lightbox-stage img {
+  display: block;
+  width: auto;
+  height: 100%;
+  max-width: calc(100vw - 340px);
+  max-height: calc(100vh - 250px);
+  object-fit: contain;
+}
+
+.workshop-lightbox-figure figcaption {
+  flex: 0 0 auto;
+  color: #101010;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.workshop-lightbox-thumbnails {
+  position: absolute;
+  z-index: 2;
+  bottom: 34px;
+  left: 50%;
+  display: flex;
+  gap: 32px;
+  transform: translateX(-50%);
+}
+
+.workshop-lightbox-thumbnails button {
+  width: 132px;
+  height: 96px;
+  padding: 7px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.72);
+  cursor: pointer;
+}
+
+.workshop-lightbox-thumbnails button.is-selected {
+  border-color: var(--color-accent);
+  background: #fff;
+}
+
+.workshop-lightbox-thumbnails img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.workshop-lightbox--design-system .workshop-lightbox-thumbnails {
+  gap: 14px;
+}
+
+.workshop-lightbox--design-system .workshop-lightbox-thumbnails button {
+  width: 94px;
+  height: 78px;
+  padding: 5px;
+  border-radius: 9px;
+}
+
+.case-hero > h1 {
+  position: absolute;
+  top: 142px;
+  left: 80px;
+  width: 909px;
+  color: #fff;
+  font-size: 54px;
+  font-weight: 500;
+  line-height: 1.1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.case-hero-image-area {
+  position: absolute;
+  top: 367px;
+  left: 0;
+  width: 1440px;
+  height: 742px;
+  overflow: hidden;
+}
+
+.case-hero-image-frame {
+  position: absolute;
+  top: 52px;
+  left: 154px;
+  width: 1132px;
+  height: 638px;
+  overflow: hidden;
+  border: 10px solid #000;
+  border-radius: 12px;
+  background: #000;
+}
+
+.case-hero-image-frame img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.case-meta {
+  position: absolute;
+  top: 1157px;
+  left: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 1280px;
+  height: 47px;
+}
+
+.case-meta > div {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.case-meta > div:nth-of-type(1) { width: 164px; }
+.case-meta > div:nth-of-type(2) { width: 353px; }
+.case-meta > div:nth-of-type(3) { width: 276px; }
+
+.case-meta > i {
+  flex: 0 0 auto;
+}
+
+.case-meta strong,
+.case-meta span {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.case-meta strong {
+  letter-spacing: 0.96px;
+  text-transform: uppercase;
+}
+
+.case-meta span {
+  color: #606060;
+  letter-spacing: 0.32px;
+  white-space: nowrap;
+}
+
+.case-meta i,
+.case-challenge-list i {
+  width: 1px;
+  height: 47px;
+  background: #959595;
+}
+
+/* FinTech platform overview — Figma 1015:1461 */
+.fintech-case-page {
+  min-height: 3905px;
+}
+
+/* FinTech platform in-detail hero — Figma 983:16195 */
+.fintech-detail-page {
+  min-height: 15296px;
+  background: var(--color-background);
+}
+
+.fintech-detail-hero {
+  position: relative;
+  width: 1440px;
+  height: 1290px;
+  margin: 0 auto;
+}
+
+.fintech-detail-hero-background {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 1440px;
+  height: 367px;
+  background: #350473;
+}
+
+.fintech-detail-hero > h1 {
+  position: absolute;
+  top: 201px;
+  left: 80px;
+  width: 909px;
+  color: #fff;
+  font-size: 54px;
+  font-weight: 500;
+  line-height: 1.1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-hero > h1 span {
+  display: block;
+  white-space: nowrap;
+}
+
+.fintech-detail-dashboard-area {
+  position: absolute;
+  top: 367px;
+  left: 0;
+  width: 1440px;
+  height: 742px;
+  overflow: hidden;
+}
+
+.fintech-detail-dashboard-frame {
+  position: absolute;
+  top: 52px;
+  left: 211px;
+  width: 1018px;
+  height: 639px;
+  overflow: hidden;
+  border: 10px solid #000;
+  border-radius: 12px;
+  background: #000;
+}
+
+.fintech-detail-dashboard-frame img {
+  position: absolute;
+  top: -0.04%;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 120.57%;
+  max-width: none;
+  pointer-events: none;
+}
+
+.fintech-detail-meta {
+  position: absolute;
+  top: 1157px;
+  left: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 1280px;
+}
+
+.fintech-detail-meta-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 16px;
+  line-height: normal;
+}
+
+.fintech-detail-meta-role {
+  width: 275px;
+  gap: 13px;
+}
+
+.fintech-detail-meta-scope {
+  width: 394px;
+}
+
+.fintech-detail-meta-scale {
+  width: 353.414px;
+}
+
+.fintech-detail-meta-item > strong {
+  color: #101010;
+  font-weight: 500;
+  letter-spacing: 0.96px;
+  text-transform: uppercase;
+}
+
+.fintech-detail-meta-item > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  letter-spacing: 0.32px;
+}
+
+.fintech-detail-meta-item span {
+  color: #606060;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.fintech-detail-meta-item p {
+  color: #909090;
+  font-weight: 400;
+}
+
+.fintech-detail-meta-divider {
+  display: block;
+  width: 1px;
+  height: 79.5px;
+}
+
+.fintech-detail-text-section {
+  position: relative;
+  width: 1440px;
+  height: 265px;
+  margin: 0 auto;
+}
+
+.fintech-detail-overview {
+  margin-top: 43px;
+}
+
+.fintech-detail-text-section > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  color: #101010;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-overview-copy {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+  width: 954px;
+  color: #606060;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  white-space: normal;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-design-challenge {
+  position: relative;
+  width: 1440px;
+  height: 544px;
+  margin: 0 auto;
+  background: #350473;
+  color: #fff;
+}
+
+.fintech-detail-design-challenge > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-design-challenge blockquote {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  width: 954px;
+  margin: 0;
+  font-size: 42px;
+  font-weight: 200;
+  line-height: 1.1;
+  white-space: normal;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-design-challenge > p {
+  position: absolute;
+  top: 442px;
+  left: 406px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-usability {
+  position: relative;
+  width: 1440px;
+  height: 576px;
+  margin: 0 auto;
+  color: #101010;
+}
+
+.fintech-detail-usability > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  display: flex;
+  flex-direction: column;
+  width: 181px;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-usability-grid {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  display: grid;
+  grid-template-columns: repeat(3, 302px);
+  grid-auto-rows: 190px;
+  gap: 36px 24px;
+  width: 954px;
+}
+
+.fintech-detail-usability-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.fintech-detail-usability-card h3 {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  margin: 0;
+  color: #101010;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.36px;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-usability-card p {
+  position: absolute;
+  top: 116px;
+  left: 32px;
+  width: 237px;
+  color: #606060;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-usability-card:nth-child(3) p {
+  width: 250px;
+}
+
+.fintech-detail-challenges {
+  position: relative;
+  width: 1440px;
+  height: 813px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: #350473;
+  color: #fff;
+}
+
+.fintech-detail-challenges > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  margin: 0;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-challenges-intro {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+  width: 954px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-challenges-list {
+  position: absolute;
+  inset: 0;
+}
+
+.fintech-detail-challenge-item {
+  position: absolute;
+  left: 80px;
+  width: 1298px;
+}
+
+.fintech-detail-challenge-item:nth-child(1) { top: 249px; }
+.fintech-detail-challenge-item:nth-child(2) { top: 365px; }
+.fintech-detail-challenge-item:nth-child(3) { top: 515px; }
+.fintech-detail-challenge-item:nth-child(4) { top: 665px; }
+
+.fintech-detail-challenge-item strong {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-challenge-item p {
+  position: absolute;
+  top: 0;
+  left: 326px;
+  width: 954px;
+  margin: 0;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.2;
+  white-space: pre-line;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-challenge-item:nth-child(1) p,
+.fintech-detail-challenge-item:nth-child(3) p {
+  width: 972px;
+}
+
+.fintech-detail-challenges-divider {
+  position: absolute;
+  left: 80px;
+  display: block;
+  width: 1280px;
+  height: 1px;
+}
+
+.fintech-detail-hmw {
+  position: relative;
+  width: 1440px;
+  height: 425px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: #350473;
+  color: #fff;
+}
+
+.fintech-detail-hmw > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  margin: 0;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-hmw > p {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  width: 954px;
+  margin: 0;
+  font-size: 48px;
+  font-weight: 200;
+  line-height: 1.1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-process {
+  position: relative;
+  width: 1440px;
+  height: 1216px;
+  margin: 0 auto;
+  overflow: hidden;
+  color: #101010;
+}
+
+.fintech-detail-process > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 217px;
+  margin: 0;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-process-intro {
+  position: absolute;
+  top: 91px;
+  left: 406px;
+  width: 954px;
+  margin: 0;
+  color: #606060;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-process-list {
+  position: absolute;
+  top: 144px;
+  left: 406px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 954px;
+}
+
+.fintech-detail-process-card {
+  position: relative;
+  width: 954px;
+  height: 230px;
+  flex: 0 0 230px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.fintech-detail-process-card h3 {
+  position: absolute;
+  top: 41px;
+  left: 41px;
+  margin: 0;
+  color: #1e293b;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 36px;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-process-card > span {
+  position: absolute;
+  top: 41px;
+  right: 41px;
+  color: #6366f1;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 40px;
+  opacity: 0.8;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-process-card > p {
+  position: absolute;
+  top: 105px;
+  left: 41px;
+  width: 696px;
+  margin: 0;
+  color: #475569;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-strategy {
+  position: relative;
+  width: 1440px;
+  height: 415px;
+  margin: 0 auto;
+  overflow: hidden;
+  color: #101010;
+}
+
+.fintech-detail-strategy > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  display: flex;
+  flex-direction: column;
+  width: 217px;
+  margin: 0;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-strategy-grid {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  display: grid;
+  grid-template-columns: repeat(3, 302px);
+  gap: 24px;
+  width: 954px;
+}
+
+.fintech-detail-strategy-card {
+  position: relative;
+  width: 302px;
+  height: 255px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.fintech-detail-strategy-card h3 {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  margin: 0;
+  color: #101010;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.36px;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-strategy-card p {
+  position: absolute;
+  top: 160px;
+  left: 32px;
+  width: 237px;
+  margin: 0;
+  color: #606060;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-strategic-shift {
+  position: relative;
+  width: 1440px;
+  height: 319px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: #350473;
+  color: #fff;
+}
+
+.fintech-detail-strategic-shift > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  margin: 0;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-strategic-shift > p {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  width: 954px;
+  margin: 0;
+  font-size: 48px;
+  font-weight: 200;
+  line-height: 1.1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-strategic-shift strong {
+  font-weight: 500;
+}
+
+/* FinTech in-detail key UX interventions — Figma 1:3724 */
+.fintech-detail-interventions {
+  position: relative;
+  width: 1440px;
+  height: 8623px;
+  margin: 0 auto;
+  color: #101010;
+}
+
+.fintech-detail-interventions > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  display: flex;
+  flex-direction: column;
+  width: 217px;
+  margin: 0;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-interventions-intro {
+  position: absolute;
+  top: 120px;
+  left: 406px;
+  width: 954px;
+  margin: 0;
+  color: #606060;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-interventions-list {
+  position: absolute;
+  top: 196px;
+  left: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 51.406px;
+  width: 1280px;
+}
+
+.fintech-intervention-card {
+  display: flex;
+  flex-direction: column;
+  gap: 30.843px;
+  width: 1280px;
+  box-sizing: border-box;
+  padding: 52.691px 32.128px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 15.422px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1.285px #e8eaee;
+}
+
+.fintech-intervention-card:nth-child(1) { height: 1037.333px; }
+.fintech-intervention-card:nth-child(2) { height: 1094.381px; }
+.fintech-intervention-card:nth-child(3) { height: 1283.783px; }
+.fintech-intervention-card:nth-child(4) { height: 4705.323px; }
+
+.fintech-intervention-card > h3 {
+  flex: 0 0 34px;
+  margin: 0;
+  color: #101010;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-intervention-notes {
+  display: grid;
+  flex: 0 0 auto;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20.562px;
+  width: 100%;
+}
+
+.fintech-intervention-card:nth-child(1) .fintech-intervention-notes { height: 188.554px; }
+.fintech-intervention-card:nth-child(2) .fintech-intervention-notes,
+.fintech-intervention-card:nth-child(3) .fintech-intervention-notes { height: 162.554px; }
+.fintech-intervention-card:nth-child(4) .fintech-intervention-notes { height: 137.554px; }
+
+.fintech-intervention-note {
+  display: flex;
+  flex-direction: column;
+  gap: 5.141px;
+  box-sizing: border-box;
+  padding: 16.707px 21.847px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 15.422px;
+}
+
+.fintech-intervention-card:nth-child(3) .fintech-intervention-note-problem,
+.fintech-intervention-card:nth-child(3) .fintech-intervention-note-solution,
+.fintech-intervention-card:nth-child(4) .fintech-intervention-note-problem,
+.fintech-intervention-card:nth-child(4) .fintech-intervention-note-solution {
+  padding-right: 16.707px;
+  padding-left: 16.707px;
+}
+
+.fintech-intervention-note-problem {
+  background: #fdecec;
+  box-shadow: inset 0 0 0 1.285px #f6d5d5;
+}
+
+.fintech-intervention-note-solution {
+  background: #e7f8ee;
+  box-shadow: inset 0 0 0 1.285px #c9e8d6;
+}
+
+.fintech-intervention-note-result {
+  background: #eff6ff;
+  box-shadow: inset 0 0 0 1.285px #dbeafe;
+}
+
+.fintech-intervention-note > strong {
+  font-size: 12.851px;
+  font-weight: 700;
+  line-height: 20.884px;
+  letter-spacing: 0.6426px;
+  text-transform: uppercase;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-intervention-note-problem > strong { color: #b62020; }
+.fintech-intervention-note-solution > strong { color: #267346; }
+.fintech-intervention-note-result > strong { color: #1a5de6; }
+
+.fintech-intervention-note > p {
+  margin: 0;
+  color: rgba(24, 29, 37, 0.7);
+  font-size: 17.992px;
+  font-weight: 400;
+  line-height: 25.703px;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-intervention-note > p strong {
+  font-weight: 700;
+}
+
+.fintech-intervention-images {
+  display: flex;
+  flex-direction: column;
+  gap: 30.843px;
+  width: 100%;
+}
+
+.fintech-intervention-image {
+  position: relative;
+  flex: 0 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.fintech-intervention-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.fintech-intervention-image-1-1 {
+  height: 647.711px;
+  border-radius: 15.422px;
+  box-shadow: inset 0 0 0 1.285px #e8eaee;
+}
+
+.fintech-intervention-image-2-1 {
+  height: 730.759px;
+  border-radius: 20.562px;
+}
+
+.fintech-intervention-image-3-1 {
+  height: 920.161px;
+  border-radius: 20.562px;
+}
+
+.fintech-intervention-image-4-1 {
+  width: 1217.444px;
+  height: 919.846px;
+  margin-left: -0.001px;
+  border-radius: 20.562px;
+  box-shadow: inset 0 0 0 1.285px #ddd;
+}
+
+.fintech-intervention-card:nth-child(4) .fintech-intervention-image:not(:first-child) {
+  height: 658.527px;
+  box-shadow: inset 0 0 0 1.285px #ddd;
+}
+
+/* FinTech in-detail outcomes — Figma 1:3818 */
+.fintech-detail-outcomes {
+  position: relative;
+  width: 1440px;
+  height: 502px;
+  margin: 0 auto;
+  color: #101010;
+}
+
+.fintech-detail-outcomes > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 354px;
+  margin: 0;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-outcomes-grid {
+  position: absolute;
+  top: 204px;
+  left: 80px;
+  display: grid;
+  grid-template-columns: repeat(3, 411px);
+  gap: 24px;
+  width: 1280px;
+}
+
+.fintech-detail-outcome-card {
+  position: relative;
+  width: 411px;
+  height: 218px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.fintech-detail-outcome-card h3 {
+  position: absolute;
+  top: 32px;
+  left: 42px;
+  margin: 0;
+  color: #101010;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-outcome-card strong {
+  position: absolute;
+  top: 104px;
+  left: 42px;
+  width: 312px;
+  color: #350473;
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-detail-outcome-card:first-child strong {
+  top: 112px;
+  font-size: 32px;
+}
+
+.fintech-detail-outcome-card:nth-child(3) strong {
+  top: 107px;
+}
+
+.fintech-detail-outcome-card p {
+  position: absolute;
+  top: 168px;
+  left: 42px;
+  width: 236px;
+  margin: 0;
+  color: #909090;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: 0.32px;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-case-hero {
+  position: relative;
+  width: 1440px;
+  height: 1290px;
+  margin: 0 auto;
+}
+
+.fintech-case-hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1440px;
+  height: 367px;
+  background: #350473;
+}
+
+.fintech-case-hero > h1 {
+  position: absolute;
+  top: 201px;
+  left: 80px;
+  width: 909px;
+  color: #fff;
+  font-size: 54px;
+  font-weight: 500;
+  line-height: 1.1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-case-hero > h1 span {
+  display: block;
+  white-space: nowrap;
+}
+
+.fintech-case-dashboard-area {
+  position: absolute;
+  top: 367px;
+  left: 0;
+  width: 1440px;
+  height: 742px;
+  overflow: hidden;
+}
+
+.fintech-case-dashboard-frame {
+  position: absolute;
+  top: 52px;
+  left: 211px;
+  width: 1018px;
+  height: 639px;
+  overflow: hidden;
+  border: 10px solid #000;
+  border-radius: 12px;
+  background: #000;
+}
+
+.fintech-case-dashboard-frame img {
+  position: absolute;
+  top: -0.04%;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 120.57%;
+  max-width: none;
+  pointer-events: none;
+}
+
+.fintech-case-meta-item {
+  position: absolute;
+  top: 1157px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.fintech-case-meta-role {
+  left: 80px;
+  width: 275px;
+  gap: 13px;
+}
+
+.fintech-case-meta-scope {
+  left: 503px;
+  width: 410px;
+}
+
+.fintech-case-meta-scale {
+  left: 1007px;
+  width: 353px;
+}
+
+.fintech-case-meta-item strong,
+.fintech-case-meta-item span {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: normal;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-case-meta-item strong {
+  color: #101010;
+  letter-spacing: 0.96px;
+  text-transform: uppercase;
+}
+
+.fintech-case-meta-item span {
+  color: #606060;
+  letter-spacing: 0.32px;
+  white-space: nowrap;
+}
+
+.fintech-case-meta-divider {
+  position: absolute;
+  top: 1159px;
+  display: block;
+  width: 1px;
+  height: 46.899px;
+}
+
+.fintech-case-meta-divider-one { left: 442px; }
+.fintech-case-meta-divider-two { left: 967px; }
+
+/* Vidal Health overview hero — Figma 1:5815 */
+.healthcare-case-page {
+  min-height: 4297px;
+}
+
+.healthcare-case-hero {
+  position: relative;
+  width: 1440px;
+  height: 1703px;
+  margin: 0 auto;
+}
+
+.healthcare-case-hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1440px;
+  height: 367px;
+  background: #3e8563;
+}
+
+.healthcare-case-hero > h1 {
+  position: absolute;
+  top: 142px;
+  left: 80px;
+  width: 870px;
+  color: #fff;
+  font-size: 54px;
+  font-weight: 500;
+  line-height: 1.1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-case-collage-area {
+  position: absolute;
+  top: 367px;
+  left: 0;
+  width: 1440px;
+  height: 1143px;
+  overflow: hidden;
+}
+
+.healthcare-case-collage-area img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 1440px;
+  height: 1143px;
+  max-width: none;
+  pointer-events: none;
+}
+
+.healthcare-case-meta {
+  position: absolute;
+  top: 1570px;
+  left: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 1280px;
+  height: 53px;
+}
+
+.healthcare-case-meta-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.healthcare-case-meta-role {
+  width: 275px;
+  gap: 13px;
+}
+
+.healthcare-case-meta-scope { width: 434px; }
+.healthcare-case-meta-scale { width: 219px; }
+
+.healthcare-case-meta-item strong,
+.healthcare-case-meta-item span {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: normal;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-case-meta-item strong {
+  color: #101010;
+  letter-spacing: 0.96px;
+  text-transform: uppercase;
+}
+
+.healthcare-case-meta-item span {
+  color: #606060;
+  letter-spacing: 0.32px;
+  white-space: nowrap;
+}
+
+.healthcare-case-meta > i {
+  display: block;
+  width: 1px;
+  height: 47px;
+  background: #959595;
+}
+
+/* Vidal Health in-detail hero — Figma 1:3854 */
+.healthcare-detail-page {
+  min-height: 19272px;
+}
+
+.healthcare-detail-hero {
+  height: 1811px;
+}
+
+.healthcare-detail-meta {
+  position: absolute;
+  top: 1570px;
+  left: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 1280px;
+  height: 161px;
+}
+
+.healthcare-detail-meta-item {
+  display: flex;
+  flex: 0 0 auto;
+  height: 161px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 16px;
+  line-height: normal;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-detail-meta-role {
+  width: 275px;
+  gap: 13px;
+}
+
+.healthcare-detail-meta-scope { width: 434px; }
+.healthcare-detail-meta-scale { width: 353px; }
+
+.healthcare-detail-meta-item strong {
+  color: #101010;
+  font-weight: 500;
+  letter-spacing: 0.96px;
+  text-transform: uppercase;
+}
+
+.healthcare-detail-meta-item > div {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.healthcare-detail-meta-item span {
+  color: #606060;
+  font-weight: 500;
+  letter-spacing: 0.32px;
+  white-space: nowrap;
+}
+
+.healthcare-detail-meta-item p {
+  width: 100%;
+  color: #909090;
+  font-weight: 400;
+  letter-spacing: 0.32px;
+}
+
+.healthcare-detail-meta > i {
+  display: block;
+  flex: 0 0 1px;
+  width: 1px;
+  height: 79.5px;
+  background: #959595;
+}
+
+/* Vidal Health project overview — Figma 1:4905 */
+.healthcare-detail-overview {
+  position: relative;
+  width: 1440px;
+  height: 265px;
+  margin: 0 auto;
+}
+
+.healthcare-detail-overview > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  color: #101010;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-detail-overview > div {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  width: 954px;
+  color: #606060;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-detail-overview > div p:first-child {
+  margin-bottom: 20.8px;
+}
+
+/* Vidal Health problem — Figma 1:4908 */
+.healthcare-detail-problem {
+  position: relative;
+  width: 1440px;
+  height: 286px;
+  margin: 0 auto;
+}
+
+.healthcare-detail-problem > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  color: #101010;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-detail-problem > div {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  width: 954px;
+  color: #606060;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-detail-problem > div p:first-child {
+  margin-bottom: 20.8px;
+}
+
+/* Vidal Health design challenge — Figma 1:4911 */
+.healthcare-detail-design-challenge {
+  position: relative;
+  width: 1440px;
+  height: 436px;
+  margin: 0 auto;
+  background: #3e8563;
+  color: #fff;
+}
+
+.healthcare-detail-design-challenge > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-detail-design-challenge > blockquote {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  width: 954px;
+  margin: 0;
+  font-size: 42px;
+  font-weight: 200;
+  line-height: 1.1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+/* Vidal Health core usability issues — Figma 1:4914 */
+.healthcare-detail-usability {
+  position: relative;
+  width: 1440px;
+  height: 802px;
+  margin: 0 auto;
+  color: #101010;
+}
+
+.healthcare-detail-usability > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  margin: 0;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-detail-usability-grid {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  display: grid;
+  grid-template-columns: repeat(3, 302px);
+  grid-auto-rows: 190px;
+  gap: 36px 24px;
+}
+
+.healthcare-detail-usability-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.healthcare-detail-usability-card h3 {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  width: 247px;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.36px;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-detail-usability-card p {
+  position: absolute;
+  top: 116px;
+  left: 32px;
+  width: 247px;
+  margin: 0;
+  color: #606060;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-detail-usability-card.is-compact p {
+  top: 95px;
+  width: 237px;
+}
+
+/* Vidal Health challenges — Figma 1:4943 */
+.healthcare-detail-challenges {
+  position: relative;
+  width: 1440px;
+  height: 798px;
+  margin: 0 auto;
+  background: #3e8563;
+  color: #fff;
+}
+
+.healthcare-detail-challenges > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  margin: 0;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-detail-challenges-intro {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  width: 954px;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-detail-challenges-list {
+  position: absolute;
+  top: 186px;
+  left: 80px;
+  width: 1280px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.healthcare-detail-challenges-list li {
+  position: relative;
+  height: 116px;
+}
+
+.healthcare-detail-challenges-list li:not(:last-child)::after {
+  position: absolute;
+  top: 92px;
+  left: 0;
+  width: 1280px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.55);
+  content: "";
+}
+
+.healthcare-detail-challenges-list strong {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-detail-challenges-list p {
+  position: absolute;
+  top: 0;
+  left: 326px;
+  width: 954px;
+  margin: 0;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.2;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+/* Vidal Health design question — Figma 1:4960 */
+.healthcare-detail-question {
+  position: relative;
+  width: 1440px;
+  height: 478px;
+  margin: 0 auto;
+  background: #3e8563;
+  color: #fff;
+}
+
+.healthcare-detail-question > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  margin: 0;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-detail-question > p {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  width: 954px;
+  margin: 0;
+  font-size: 48px;
+  font-weight: 200;
+  line-height: 1.1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+/* Vidal Health design process — Figma 1:4963 */
+.healthcare-detail-process {
+  position: relative;
+  width: 1440px;
+  height: 1640px;
+  margin: 0 auto;
+  color: #101010;
+}
+
+.healthcare-detail-process > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 217px;
+  margin: 0;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-detail-process-intro {
+  position: absolute;
+  top: 91px;
+  left: 406px;
+  width: 954px;
+  margin: 0;
+  color: #606060;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-detail-process-list {
+  position: absolute;
+  top: 144px;
+  left: 406px;
+  display: flex;
+  width: 954px;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+  gap: 24px;
+  list-style: none;
+}
+
+.healthcare-detail-process-list > li {
+  box-sizing: border-box;
+  display: flex;
+  width: 954px;
+  padding: 40px;
+  flex-direction: column;
+  gap: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.healthcare-detail-process-list header {
+  display: flex;
+  width: 100%;
+  min-height: 40px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.healthcare-detail-process-list h3 {
+  margin: 0;
+  color: #1e293b;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 36px;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-detail-process-list header span {
+  color: #3e8563;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 40px;
+  opacity: 0.8;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-detail-process-list > li > p {
+  width: 696px;
+  margin: 0;
+  color: #475569;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+/* Vidal Health experience strategy — Figma 1:4997 */
+.healthcare-detail-strategy {
+  position: relative;
+  width: 1440px;
+  height: 415px;
+  margin: 0 auto;
+  color: #101010;
+}
+
+.healthcare-detail-strategy > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 217px;
+  margin: 0;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-detail-strategy-grid {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  display: grid;
+  grid-template-columns: repeat(3, 302px);
+  gap: 24px;
+}
+
+.healthcare-detail-strategy-grid article {
+  position: relative;
+  overflow: hidden;
+  width: 302px;
+  height: 255px;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.healthcare-detail-strategy-grid h3 {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.36px;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-detail-strategy-grid p {
+  position: absolute;
+  top: 139px;
+  left: 32px;
+  width: 237px;
+  margin: 0;
+  color: #606060;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-detail-strategy-grid article:first-child p {
+  top: 140px;
+}
+
+.healthcare-detail-strategy-grid article:last-child p {
+  width: 244px;
+}
+
+/* Vidal Health strategic shift — Figma 1:5008 */
+.healthcare-detail-strategic-shift {
+  position: relative;
+  width: 1440px;
+  height: 372px;
+  margin: 0 auto;
+  background: #3e8563;
+  color: #fff;
+}
+
+.healthcare-detail-strategic-shift > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  margin: 0;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-detail-strategic-shift > p {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  width: 954px;
+  margin: 0;
+  font-size: 48px;
+  font-weight: 200;
+  line-height: 1.1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+/* Vidal Health key UX interventions — Figma 1:5011 */
+.healthcare-detail-interventions {
+  position: relative;
+  box-sizing: border-box;
+  width: 1440px;
+  height: 11550px;
+  margin: 0 auto;
+  padding-top: 196px;
+  color: #181d25;
+}
+
+.healthcare-detail-interventions > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  margin: 0;
+  color: #101010;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-intervention-list {
+  display: flex;
+  width: 1280px;
+  margin: 0 auto;
+  flex-direction: column;
+  gap: 51.406px;
+}
+
+.healthcare-intervention-card {
+  position: relative;
+  box-sizing: border-box;
+  width: 1280px;
+  height: var(--intervention-card-height);
+  overflow: hidden;
+  border: 1.285px solid #e8eaee;
+  border-radius: 15.422px;
+  background: #fff;
+}
+
+.healthcare-intervention-card > h3 {
+  position: absolute;
+  top: 52.691px;
+  left: 32.128px;
+  margin: 0;
+  color: #181d25;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-intervention-notes {
+  position: absolute;
+  top: 118px;
+  left: 32.128px;
+  display: grid;
+  width: 1215.743px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20.562px;
+}
+
+.healthcare-intervention-notes > div {
+  box-sizing: border-box;
+  min-height: 125px;
+  padding: 16.707px 21.847px;
+  border: 1.285px solid;
+  border-radius: 10.281px;
+}
+
+.healthcare-intervention-notes .is-problem {
+  border-color: #f6d5d5;
+  background: #fdecec;
+}
+
+.healthcare-intervention-notes .is-solution {
+  border-color: #c9e8d6;
+  background: #e7f8ee;
+}
+
+.healthcare-intervention-notes .is-result {
+  border-color: #dbeafe;
+  background: #eff6ff;
+}
+
+.healthcare-intervention-notes strong {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 12.851px;
+  font-weight: 700;
+  line-height: 20.884px;
+  letter-spacing: 0.6426px;
+  text-transform: uppercase;
+}
+
+.healthcare-intervention-notes .is-problem strong { color: #b62020; }
+.healthcare-intervention-notes .is-solution strong { color: #267346; }
+.healthcare-intervention-notes .is-result strong { color: #1a5de6; }
+
+.healthcare-intervention-notes p {
+  margin: 0;
+  color: rgba(24, 29, 37, 0.7);
+  font-size: 17.992px;
+  font-weight: 400;
+  line-height: 25.703px;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-intervention-visual {
+  position: absolute;
+  right: 32.128px;
+  bottom: 52.691px;
+  left: 32.128px;
+  height: 717.108px;
+  overflow: hidden;
+  border-radius: 51.406px;
+  background: #153f31;
+}
+
+.healthcare-intervention-visual::before,
+.healthcare-intervention-visual::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+}
+
+.healthcare-intervention-visual::before {
+  background: url('/assets/case-study-vidal/interventions/background.png') center / cover no-repeat;
+  opacity: 0.24;
+}
+
+.healthcare-intervention-visual::after {
+  background: rgba(34, 100, 72, 0.58);
+}
+
+.healthcare-intervention-card.is-claims .healthcare-intervention-visual,
+.healthcare-intervention-card.is-health-checks .healthcare-intervention-visual,
+.healthcare-intervention-card.is-wellness .healthcare-intervention-visual {
+  height: 1575.582px;
+}
+
+.healthcare-intervention-card.is-policy .healthcare-intervention-visual {
+  height: 1462.49px;
+}
+
+.healthcare-intervention-card.is-wellness .healthcare-intervention-notes {
+  top: 118px;
+}
+
+.healthcare-intervention-placard {
+  position: absolute;
+  z-index: 2;
+  top: 45px;
+  left: 57px;
+  box-sizing: border-box;
+  width: 322px;
+  min-height: 252px;
+  padding: 34px 31px;
+  border-radius: 25.703px;
+  background: #d7efcd;
+  color: #181d25;
+}
+
+.healthcare-intervention-placard h4 {
+  margin: 0;
+  font-size: 32.128px;
+  font-weight: 500;
+  line-height: 1.12;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-intervention-placard p {
+  position: relative;
+  margin: 29px 0 0;
+  padding-left: 26px;
+  color: rgba(24, 29, 37, 0.75);
+  font-size: 15.422px;
+  font-weight: 400;
+  line-height: 20.562px;
+}
+
+.healthcare-intervention-placard p::before {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #4b9a68;
+  content: "";
+}
+
+.healthcare-intervention-card.is-cashless .healthcare-intervention-placard,
+.healthcare-intervention-card.is-policy .healthcare-intervention-placard {
+  min-height: 430px;
+}
+
+.healthcare-intervention-card.is-claims .healthcare-intervention-placard,
+.healthcare-intervention-card.is-health-checks .healthcare-intervention-placard,
+.healthcare-intervention-card.is-wellness .healthcare-intervention-placard {
+  width: 245px;
+  min-height: 207px;
+}
+
+.healthcare-intervention-phones,
+.healthcare-intervention-phone {
+  position: absolute;
+  z-index: 2;
+  margin: 0;
+}
+
+.healthcare-intervention-phones {
+  inset: 0;
+}
+
+.healthcare-intervention-phone {
+  width: 321px;
+}
+
+.healthcare-intervention-phone-shell {
+  position: relative;
+  width: 321px;
+  height: 643px;
+  overflow: hidden;
+}
+
+.healthcare-intervention-screen {
+  position: absolute;
+  z-index: 1;
+  top: 20px;
+  left: 21px;
+  width: 279px;
+  height: 603px;
+  border-radius: 34px;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.healthcare-intervention-phone-frame {
+  position: absolute;
+  z-index: 2;
+  top: -46px;
+  left: -208px;
+  width: 736px;
+  height: 736px;
+  max-width: none;
+}
+
+.healthcare-intervention-phone figcaption {
+  display: flex;
+  margin-top: 18px;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+  font-size: 16.707px;
+  font-weight: 500;
+  line-height: 21px;
+  white-space: nowrap;
+}
+
+.healthcare-intervention-phone figcaption span {
+  display: inline-flex;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #d7efcd;
+  color: #267346;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.healthcare-intervention-card.is-health-card .healthcare-intervention-placard {
+  top: 40px;
+  width: 270px;
+  min-height: 169px;
+}
+
+.healthcare-intervention-card.is-health-card .healthcare-intervention-phone {
+  top: 37px;
+  left: 447px;
+}
+
+.healthcare-intervention-ecard {
+  position: absolute;
+  z-index: 3;
+  top: 323px;
+  left: 434px;
+  width: 347px;
+  height: 176px;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.healthcare-intervention-ecard-background {
+  position: absolute;
+  inset: 0;
+  width: 346.988px;
+  height: 176.083px;
+}
+
+.healthcare-intervention-ecard-logo {
+  position: absolute;
+  top: 20.72px;
+  left: 17.61px;
+  width: 124.294px;
+  height: 22.787px;
+}
+
+.healthcare-intervention-ecard-copy {
+  position: absolute;
+  top: 77.68px;
+  left: 17.61px;
+  width: 115px;
+  margin: 0;
+  color: #707070;
+  font-family: Manrope, sans-serif;
+  font-size: 16.112px;
+  font-weight: 500;
+  line-height: 20.716px;
+}
+
+.healthcare-intervention-ecard-action {
+  position: absolute;
+  top: 125.33px;
+  left: 17.61px;
+  width: 37.288px;
+  height: 37.288px;
+}
+
+.healthcare-intervention-member-card {
+  position: absolute;
+  top: 30.12px;
+  left: 166.53px;
+  width: 207.239px;
+  height: 123.725px;
+  overflow: hidden;
+  border-radius: 10.288px;
+  box-shadow: 0 10.288px 14.697px rgba(130, 132, 128, 0.1);
+  font-family: Manrope, sans-serif;
+}
+
+.healthcare-intervention-member-card-art {
+  position: absolute;
+  inset: 0;
+  width: 207.239px;
+  height: 123.725px;
+}
+
+.healthcare-intervention-member-card > strong {
+  position: absolute;
+  top: 13.38px;
+  left: 14.31px;
+  color: #007071;
+  font-size: 10.358px;
+  font-weight: 800;
+  line-height: 9.833px;
+}
+
+.healthcare-intervention-member-card-logo {
+  position: absolute;
+  top: 13.01px;
+  left: 99.77px;
+  width: 60.58px;
+  height: 8.543px;
+}
+
+.healthcare-intervention-member-card-symbol {
+  position: absolute;
+  top: 9.11px;
+  left: 162.52px;
+  width: 16.208px;
+  height: 15.401px;
+}
+
+.healthcare-intervention-member-card-labels,
+.healthcare-intervention-member-card-values {
+  position: absolute;
+  top: 38.24px;
+  display: flex;
+  height: 71.711px;
+  flex-direction: column;
+  color: #707070;
+  font-size: 6.76px;
+  line-height: 12.71px;
+}
+
+.healthcare-intervention-member-card-labels {
+  left: 14.31px;
+  width: 43px;
+  font-weight: 600;
+}
+
+.healthcare-intervention-member-card-values {
+  left: 76.88px;
+  width: 75px;
+  font-weight: 500;
+  letter-spacing: 0.135px;
+}
+
+.healthcare-intervention-member-card-labels span,
+.healthcare-intervention-member-card-values span {
+  height: 16.614px;
+}
+
+.healthcare-intervention-card.is-cashless .healthcare-intervention-phone:nth-child(1),
+.healthcare-intervention-card.is-hospitals .healthcare-intervention-phone:nth-child(1) {
+  top: 37px;
+  left: 448px;
+}
+
+.healthcare-intervention-card.is-cashless .healthcare-intervention-phone:nth-child(2),
+.healthcare-intervention-card.is-hospitals .healthcare-intervention-phone:nth-child(2) {
+  top: 37px;
+  left: 837px;
+}
+
+.healthcare-intervention-card.is-claims .healthcare-intervention-phone:nth-child(1),
+.healthcare-intervention-card.is-health-checks .healthcare-intervention-phone:nth-child(1),
+.healthcare-intervention-card.is-wellness .healthcare-intervention-phone:nth-child(1) {
+  top: 37px;
+  left: 389px;
+}
+
+.healthcare-intervention-card.is-claims .healthcare-intervention-phone:nth-child(2),
+.healthcare-intervention-card.is-health-checks .healthcare-intervention-phone:nth-child(2),
+.healthcare-intervention-card.is-wellness .healthcare-intervention-phone:nth-child(2) {
+  top: 37px;
+  left: 817px;
+}
+
+.healthcare-intervention-card.is-claims .healthcare-intervention-phone:nth-child(3),
+.healthcare-intervention-card.is-health-checks .healthcare-intervention-phone:nth-child(3),
+.healthcare-intervention-card.is-wellness .healthcare-intervention-phone:nth-child(3) {
+  top: 824px;
+  left: 389px;
+}
+
+.healthcare-intervention-card.is-claims .healthcare-intervention-phone:nth-child(4),
+.healthcare-intervention-card.is-health-checks .healthcare-intervention-phone:nth-child(4),
+.healthcare-intervention-card.is-wellness .healthcare-intervention-phone:nth-child(4) {
+  top: 824px;
+  left: 817px;
+}
+
+.healthcare-intervention-card.is-policy .healthcare-intervention-phone {
+  top: 44.98px;
+  left: 532.05px;
+  transform: scale(1.3772);
+  transform-origin: top left;
+}
+
+.healthcare-intervention-card.is-policy .healthcare-intervention-screen {
+  object-position: top center;
+}
+
+.healthcare-intervention-policy-continuation {
+  position: absolute;
+  z-index: 3;
+  top: 264.26px;
+  left: 562.11px;
+  width: 381.965px;
+  height: 1103.452px;
+  overflow: hidden;
+  border-radius: 25.703px;
+}
+
+.healthcare-intervention-policy-continuation img {
+  position: absolute;
+  top: -17.61%;
+  left: 0;
+  width: 100%;
+  height: 117.76%;
+  max-width: none;
+}
+
+/* Vidal Health outcome summary — Figma 1:5332 */
+.healthcare-detail-outcomes {
+  position: relative;
+  width: 1440px;
+  height: 419px;
+  margin: 0 auto;
+  color: #101010;
+}
+
+.healthcare-detail-outcomes > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 584px;
+  margin: 0;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-detail-outcome-grid {
+  position: absolute;
+  top: 207px;
+  left: 80px;
+  display: grid;
+  grid-template-columns: repeat(3, 411px);
+  gap: 24px;
+}
+
+.healthcare-detail-outcome-grid article {
+  position: relative;
+  width: 411px;
+  height: 132px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.healthcare-detail-outcome-grid strong {
+  position: absolute;
+  top: 40px;
+  left: 36px;
+  color: #3e8563;
+  font-size: 52px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-detail-outcome-grid p {
+  position: absolute;
+  top: 48px;
+  left: 179px;
+  width: 184px;
+  margin: 0;
+  color: #909090;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: 0.32px;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-detail-outcome-grid article:last-child p {
+  left: 191px;
+}
+
+/* Vidal Health project overview — Figma 1:6866 */
+.healthcare-case-challenge {
+  position: relative;
+  width: 1440px;
+  height: 420px;
+  margin: 0 auto;
+  color: #101010;
+}
+
+.healthcare-challenge-top-rule {
+  position: absolute;
+  top: 0;
+  left: 80px;
+  display: block;
+  width: 1280px;
+  height: 1px;
+}
+
+.healthcare-challenge-eyebrow {
+  position: absolute;
+  top: 64px;
+  left: 80px;
+  width: 1280px;
+  color: #606060;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.56px;
+  text-transform: uppercase;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-case-challenge > h2 {
+  position: absolute;
+  top: 94px;
+  left: 80px;
+  width: 543px;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-challenge-summary {
+  position: absolute;
+  top: 82px;
+  left: 873px;
+  width: 487px;
+  color: #606060;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-challenge-points {
+  position: absolute;
+  top: 270px;
+  left: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 1278.506px;
+}
+
+.healthcare-challenge-point {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 16px;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-challenge-point strong {
+  color: #101010;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.96px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.healthcare-challenge-point span {
+  color: #606060;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: 0.32px;
+}
+
+.healthcare-challenge-discovery { width: 229px; }
+.healthcare-challenge-journeys,
+.healthcare-challenge-guidance { width: 261px; }
+
+.healthcare-challenge-points > img {
+  display: block;
+  flex: 0 0 1px;
+  width: 1px;
+  height: 46.899px;
+}
+
+/* Vidal Health solution — Figma 1:6883 */
+.healthcare-case-solution {
+  position: relative;
+  width: 1440px;
+  height: 1101px;
+  margin: 0 auto;
+  color: #101010;
+}
+
+.healthcare-solution-top-rule {
+  position: absolute;
+  top: 0;
+  left: 80px;
+  display: block;
+  width: 1280px;
+  height: 1px;
+}
+
+.healthcare-solution-eyebrow {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 1280px;
+  color: #606060;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.56px;
+  text-transform: uppercase;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-case-solution > h2 {
+  position: absolute;
+  top: 110px;
+  left: 80px;
+  width: 571px;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-solution-summary {
+  position: absolute;
+  top: 140px;
+  left: 772px;
+  width: 588px;
+  color: #606060;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-solution-screen {
+  position: absolute;
+  top: 286px;
+  height: 622px;
+  overflow: hidden;
+  border-color: #000;
+  border-style: solid;
+  border-width: 10px 10px 0;
+  border-radius: 40px 40px 0 0;
+}
+
+.healthcare-solution-screen > div {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 40px 40px 0 0;
+  pointer-events: none;
+}
+
+.healthcare-solution-screen img {
+  position: absolute;
+  display: block;
+  max-width: none;
+}
+
+.healthcare-solution-health-card {
+  left: 90px;
+  width: 392px;
+}
+
+.healthcare-solution-health-card img {
+  top: 0.12%;
+  left: 0;
+  width: 100%;
+  height: 136.45%;
+}
+
+.healthcare-solution-cashless {
+  left: 524.952px;
+  width: 390px;
+}
+
+.healthcare-solution-cashless img {
+  top: -7.73%;
+  left: -0.05%;
+  width: 100.1%;
+  height: 137.79%;
+}
+
+.healthcare-solution-checkups {
+  left: 959.048px;
+  width: 391px;
+}
+
+.healthcare-solution-checkups img {
+  top: 0;
+  left: 0;
+  width: 99.83%;
+  height: 440.85%;
+}
+
+.healthcare-solution-caption {
+  position: absolute;
+  top: 940px;
+  display: flex;
+  width: 334px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 1.3;
+  letter-spacing: 0.28px;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-solution-caption strong {
+  width: 100%;
+  color: #101010;
+  font-weight: 700;
+}
+
+.healthcare-solution-caption span {
+  width: 100%;
+  color: #606060;
+  font-weight: 400;
+}
+
+.healthcare-solution-caption-one { left: 80px; }
+.healthcare-solution-caption-two { left: 514.952px; }
+.healthcare-solution-caption-three { left: 949.048px; }
+
+/* Vidal Health impact — Figma 1:6900 */
+.healthcare-case-impact {
+  position: relative;
+  width: 1440px;
+  height: 450px;
+  margin: 0 auto;
+  color: #101010;
+}
+
+.healthcare-impact-top-rule {
+  position: absolute;
+  top: 0;
+  left: 80px;
+  display: block;
+  width: 1280px;
+  height: 1px;
+}
+
+.healthcare-impact-eyebrow {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 1280px;
+  color: #606060;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.56px;
+  text-transform: uppercase;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-case-impact > h2 {
+  position: absolute;
+  top: 110px;
+  left: 80px;
+  width: 584px;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-impact-card {
+  position: absolute;
+  top: 237px;
+  width: 411px;
+  height: 132px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+  font-weight: 500;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.healthcare-impact-card strong {
+  position: absolute;
+  top: 40px;
+  left: 36px;
+  color: #3e8563;
+  font-size: 52px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.healthcare-impact-card span {
+  position: absolute;
+  top: 48px;
+  left: 179px;
+  width: 184px;
+  color: #909090;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: 0.32px;
+}
+
+.healthcare-impact-cashless { left: 80px; }
+.healthcare-impact-claims { left: 515px; }
+.healthcare-impact-discovery { left: 948.952px; }
+.healthcare-impact-discovery span { left: 191px; }
+
+/* Vidal Health process CTA — Figma 1:6913 */
+.healthcare-case-process-cta {
+  position: relative;
+  width: 1440px;
+  height: 162px;
+  margin: 0 auto;
+}
+
+.healthcare-case-process-cta a {
+  position: absolute;
+  top: 32px;
+  left: 488px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 465px;
+  height: 64px;
+  overflow: hidden;
+  border-radius: 106px;
+  background: #2a2a2a;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: normal;
+  text-align: center;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+/* FinTech platform challenge — Figma 1015:1493 */
+.fintech-case-challenge {
+  position: relative;
+  width: 1440px;
+  height: 420px;
+  margin: 0 auto;
+  color: #101010;
+}
+
+.fintech-challenge-top-rule {
+  position: absolute;
+  top: 0;
+  left: 80px;
+  display: block;
+  width: 1280px;
+  height: 1px;
+}
+
+.fintech-challenge-eyebrow {
+  position: absolute;
+  top: 64px;
+  left: 80px;
+  width: 1280px;
+  color: #606060;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.56px;
+  text-transform: uppercase;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-case-challenge > h2 {
+  position: absolute;
+  top: 94px;
+  left: 80px;
+  width: 543px;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-challenge-summary {
+  position: absolute;
+  top: 82px;
+  left: 873px;
+  width: 487px;
+  color: #606060;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-challenge-points {
+  position: absolute;
+  top: 270px;
+  left: 80px;
+  width: 1278.506px;
+  height: 70px;
+}
+
+.fintech-challenge-point {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 16px;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-challenge-point strong {
+  color: #101010;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.96px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.fintech-challenge-point span {
+  color: #606060;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: 0.32px;
+}
+
+.fintech-challenge-terminology { left: 0; width: 229px; }
+.fintech-challenge-overload { left: 359.835px; width: 229px; }
+.fintech-challenge-errors { left: 694.671px; width: 249px; }
+.fintech-challenge-navigation { left: 1074.506px; width: 229px; }
+
+.fintech-challenge-divider {
+  position: absolute;
+  top: 11.551px;
+  display: block;
+  width: 1px;
+  height: 46.899px;
+}
+
+.fintech-challenge-divider-one { left: 294.291px; }
+.fintech-challenge-divider-two { left: 629.127px; }
+.fintech-challenge-divider-three { left: 1008.962px; }
+
+/* FinTech platform solution — Figma 1015:1514 */
+.fintech-case-solution {
+  position: relative;
+  width: 1440px;
+  height: 1530px;
+  margin: 0 auto;
+  color: #101010;
+}
+
+.fintech-solution-top-rule {
+  position: absolute;
+  top: 0;
+  left: 80px;
+  display: block;
+  width: 1280px;
+  height: 1px;
+}
+
+.fintech-solution-eyebrow {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 1280px;
+  color: #606060;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.56px;
+  text-transform: uppercase;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-case-solution > h2 {
+  position: absolute;
+  top: 110px;
+  left: 80px;
+  width: 571px;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-solution-summary {
+  position: absolute;
+  top: 140px;
+  left: 772px;
+  width: 588px;
+  color: #606060;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-solution-image {
+  position: absolute;
+  overflow: hidden;
+  border: 6px solid #000;
+  border-radius: 12px;
+  background: #000;
+}
+
+.fintech-solution-image > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.fintech-reports-overview-image {
+  top: 270px;
+  left: 80px;
+  width: 640px;
+  height: 347px;
+}
+
+.fintech-report-detail-image {
+  top: 689px;
+  left: 779px;
+  width: 581px;
+  height: 347px;
+}
+
+.fintech-reconciliation-image {
+  top: 1115px;
+  left: 80px;
+  width: 534px;
+  height: 335px;
+}
+
+.fintech-reconciliation-image-crop {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.fintech-reconciliation-image-crop img {
+  position: absolute;
+  top: -0.04%;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 120.57%;
+  max-width: none;
+}
+
+.fintech-solution-caption {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  color: #606060;
+  font-size: 16px;
+  line-height: 1.3;
+  letter-spacing: 0.32px;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-solution-caption strong {
+  width: 100%;
+  color: #101010;
+  font-weight: 700;
+}
+
+.fintech-solution-caption span {
+  font-weight: 400;
+}
+
+.fintech-reports-overview-caption {
+  top: 525px;
+  left: 768px;
+  width: 334px;
+}
+
+.fintech-report-detail-caption {
+  top: 944px;
+  left: 445px;
+  width: 286px;
+}
+
+.fintech-reconciliation-caption {
+  top: 1358px;
+  left: 662px;
+  width: 334px;
+}
+
+.fintech-reconciliation-caption span {
+  width: 325px;
+}
+
+/* FinTech platform impact — Figma 1015:1531 */
+.fintech-case-impact {
+  position: relative;
+  width: 1440px;
+  height: 503px;
+  margin: 0 auto;
+  color: #101010;
+}
+
+.fintech-impact-top-rule {
+  position: absolute;
+  top: 0;
+  left: 80px;
+  display: block;
+  width: 1280px;
+  height: 1px;
+}
+
+.fintech-impact-eyebrow {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 1280px;
+  color: #606060;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.56px;
+  text-transform: uppercase;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-case-impact > h2 {
+  position: absolute;
+  top: 110px;
+  left: 80px;
+  width: 584px;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-impact-card {
+  position: absolute;
+  top: 237px;
+  width: 411px;
+  height: 218px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fintech-impact-card h3 {
+  position: absolute;
+  top: 32px;
+  left: 42px;
+  color: #101010;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.fintech-impact-card strong {
+  position: absolute;
+  left: 42px;
+  width: 312px;
+  color: #350473;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.fintech-impact-card span {
+  position: absolute;
+  top: 168px;
+  left: 42px;
+  color: #909090;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: 0.32px;
+}
+
+.fintech-impact-reconciliation { left: 80px; }
+.fintech-impact-support { left: 515px; }
+.fintech-impact-usability { left: 949px; }
+
+.fintech-impact-reconciliation strong {
+  top: 112px;
+  font-size: 32px;
+}
+
+.fintech-impact-support strong {
+  top: 104px;
+  font-size: 40px;
+}
+
+.fintech-impact-usability strong {
+  top: 107px;
+  font-size: 40px;
+}
+
+.fintech-impact-reconciliation span,
+.fintech-impact-usability span {
+  width: 232px;
+}
+
+.fintech-impact-support span {
+  width: 236px;
+  white-space: nowrap;
+}
+
+/* FinTech platform process CTA — Figma 1015:1547 */
+.fintech-case-process-cta {
+  position: relative;
+  width: 1440px;
+  height: 162px;
+  margin: 0 auto;
+}
+
+.fintech-case-process-cta a {
+  position: absolute;
+  top: 32px;
+  left: 488px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 465px;
+  height: 64px;
+  overflow: hidden;
+  border-radius: 106px;
+  background: #2a2a2a;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: normal;
+  text-align: center;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.case-fixed-section .case-eyebrow {
+  position: absolute;
+  top: 64px;
+  left: 80px;
+  width: 1280px;
+  color: #606060;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.56px;
+  text-transform: uppercase;
+}
+
+.case-fixed-section::before {
+  position: absolute;
+  top: 0;
+  left: 80px;
+  width: 1280px;
+  height: 1px;
+  background: #959595;
+  content: "";
+}
+
+.case-fixed-section > h2 {
+  position: absolute;
+  top: 94px;
+  left: 80px;
+  width: 543px;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.case-fixed-section > .case-summary {
+  position: absolute;
+  right: 80px;
+  width: 487px;
+  color: #606060;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.3;
+  text-align: left;
+}
+
+.case-challenge {
+  height: 396px;
+}
+
+.case-challenge > .case-summary { top: 136px; }
+
+.case-challenge-list {
+  position: absolute;
+  top: 270px;
+  left: 80px;
+  display: grid;
+  grid-template-columns: 334px 1px 334px 1px 366px;
+  column-gap: 61px;
+  align-items: start;
+  width: 1279px;
+}
+
+.case-challenge-list > div,
+.solution-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 1.3;
+  letter-spacing: 0.28px;
+}
+
+.case-challenge-list strong,
+.solution-caption strong {
+  font-weight: 700;
+}
+
+.case-challenge-list span,
+.solution-caption span {
+  color: #606060;
+}
+
+.case-solution {
+  height: 1535px;
+}
+
+.case-solution > .case-eyebrow,
+.case-impact > .case-eyebrow { top: 80px; }
+
+.case-solution > h2,
+.case-impact > h2 { top: 110px; }
+
+.case-solution > .case-summary {
+  top: 156px;
+  font-size: 16px;
+}
+
+.solution-caption {
+  font-size: 16px;
+  letter-spacing: 0.32px;
+}
+
+.solution-image {
+  position: absolute;
+  overflow: hidden;
+  border: 6px solid #000;
+  border-radius: 12px;
+  background: #000;
+}
+
+.solution-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.header-navigation-image { top: 270px; left: 80px; width: 519px; height: 347px; }
+.header-caption { position: absolute; top: 546px; left: 647px; width: 334px; }
+.search-image { top: 689px; left: 752px; width: 609.444px; height: 347px; }
+.search-caption { position: absolute; top: 965px; left: 418px; width: 286px; }
+.pipeline-image { top: 1108px; left: 80px; width: 567.373px; height: 347px; }
+.pipeline-caption { position: absolute; top: 1384px; left: 695px; width: 334px; }
+
+.case-impact {
+  height: 723px;
+}
+
+.impact-cards {
+  position: absolute;
+  top: 237px;
+  left: 80px;
+  display: flex;
+  gap: 24px;
+}
+
+.impact-card {
+  position: relative;
+  height: 438px;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.impact-card.compact { width: 316px; }
+.impact-card.medium { width: 341px; }
+.impact-card.wide { width: 575px; }
+
+.impact-card b {
+  position: absolute;
+  top: 42px;
+  left: 42px;
+  font-size: 118px;
+  color: #d7003a;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.impact-card p {
+  position: absolute;
+  bottom: 51px;
+  left: 42px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: 0.28px;
+}
+
+.impact-card.compact p { width: 232px; }
+.impact-card.medium p { width: 257px; }
+.impact-card.wide p { width: 417px; }
+
+.impact-card.wide > div b { position: absolute; }
+.impact-card.wide > div span {
+  position: absolute;
+  top: 109px;
+  left: 413px;
+  color: #d7003a;
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.case-detail-cta {
+  position: relative;
+  width: 1440px;
+  height: 162px;
+  margin: 0 auto;
+}
+
+.case-detail-cta span {
+  position: absolute;
+  top: 32px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  padding: 13px 48px;
+  border-radius: 106px;
+  background: #2a2a2a;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 500;
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+
+/* Outdoor fitness app overview — Figma 8:1290 */
+.fitness-case-page {
+  min-height: 0;
+}
+
+.fitness-case-hero {
+  position: relative;
+  width: 1440px;
+  height: 1349px;
+  margin: 0 auto;
+}
+
+.fitness-case-hero-background {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 1440px;
+  height: 367px;
+  background: #568ac6;
+}
+
+.fitness-case-hero > h1 {
+  position: absolute;
+  z-index: 2;
+  top: 201px;
+  left: 80px;
+  width: 800px;
+  color: #fff;
+  font-size: 54px;
+  font-weight: 500;
+  line-height: 1.05;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fitness-case-hero-art {
+  position: absolute;
+  top: 367px;
+  left: 0;
+  width: 1440px;
+  height: 742px;
+  overflow: hidden;
+}
+
+.fitness-case-hero-image {
+  display: block;
+  width: 1140px;
+  height: 679px;
+  margin: 32px auto 0;
+  object-fit: none;
+}
+
+.fitness-case-hero-panel {
+  position: absolute;
+  top: 152px;
+  left: 80px;
+  width: 1280px;
+  height: 360px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #457bb8;
+}
+
+.fitness-case-hero-panel img {
+  position: absolute;
+  top: 22px;
+  left: 286px;
+  width: 502px;
+  height: 316px;
+  opacity: 0.22;
+}
+
+.fitness-case-runner {
+  position: absolute;
+  z-index: 1;
+  top: 68px;
+  left: 86px;
+  display: block;
+  width: 410px;
+  height: auto;
+}
+
+.fitness-case-phone {
+  position: absolute;
+  z-index: 2;
+  top: -164px;
+  left: 300px;
+  display: block;
+  width: 1480px;
+  max-width: none;
+  height: auto;
+}
+
+.fitness-case-meta {
+  position: absolute;
+  top: 1128px;
+  left: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 1280px;
+  height: 82px;
+}
+
+.fitness-case-meta-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 16px;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fitness-case-meta-role { width: 275px; }
+.fitness-case-meta-scope { width: 455px; }
+.fitness-case-meta-scale { width: 350px; }
+
+.fitness-case-meta-item strong {
+  color: #101010;
+  font-weight: 500;
+  letter-spacing: 0.96px;
+  text-transform: uppercase;
+}
+
+.fitness-case-meta-item span {
+  color: #606060;
+  font-weight: 500;
+  letter-spacing: 0.32px;
+  white-space: nowrap;
+}
+
+.fitness-case-meta > i,
+.fitness-challenge-points > i {
+  display: block;
+  flex: 0 0 1px;
+  width: 1px;
+  height: 47px;
+  background: #959595;
+}
+
+.fitness-case-challenge,
+.fitness-case-solution,
+.fitness-case-impact,
+.fitness-case-process-cta {
+  position: relative;
+  width: 1440px;
+  margin: 0 auto;
+  color: #101010;
+}
+
+.fitness-case-challenge { height: 420px; }
+
+.fitness-section-rule {
+  position: absolute;
+  top: 0;
+  left: 80px;
+  width: 1280px;
+  height: 1px;
+  background: #959595;
+}
+
+.fitness-section-eyebrow {
+  position: absolute;
+  top: 64px;
+  left: 80px;
+  color: #606060;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.56px;
+  text-transform: uppercase;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fitness-case-challenge > h2,
+.fitness-case-solution > h2,
+.fitness-case-impact > h2 {
+  position: absolute;
+  left: 80px;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fitness-case-challenge > h2 {
+  top: 94px;
+  width: 560px;
+}
+
+.fitness-challenge-summary {
+  position: absolute;
+  top: 82px;
+  left: 874px;
+  width: 486px;
+  color: #606060;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.fitness-challenge-points {
+  position: absolute;
+  top: 270px;
+  left: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 1280px;
+}
+
+.fitness-challenge-point {
+  display: flex;
+  width: 300px;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 16px;
+}
+
+.fitness-challenge-point strong {
+  font-weight: 500;
+  letter-spacing: 0.96px;
+  text-transform: uppercase;
+}
+
+.fitness-challenge-point span {
+  color: #606060;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: 0.32px;
+}
+
+.fitness-case-solution { height: 1180px; }
+
+.fitness-case-solution .fitness-section-eyebrow { top: 80px; }
+
+.fitness-case-solution > h2 {
+  top: 110px;
+  width: 640px;
+}
+
+.fitness-solution-summary {
+  position: absolute;
+  top: 140px;
+  left: 772px;
+  width: 588px;
+  color: #606060;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.fitness-solution-grid {
+  position: absolute;
+  top: 286px;
+  left: 80px;
+  display: grid;
+  width: 1280px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.fitness-solution-item {
+  min-width: 0;
+}
+
+.fitness-solution-screen {
+  height: auto;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.fitness-solution-screen img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+
+.fitness-solution-item h3 {
+  margin-top: 31px;
+  color: #101010;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.28px;
+}
+
+.fitness-solution-item p {
+  width: 345px;
+  margin-top: 8px;
+  color: #606060;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: 0.28px;
+}
+
+.fitness-case-impact { height: 492px; }
+.fitness-case-impact .fitness-section-eyebrow { top: 80px; }
+
+.fitness-case-impact > h2 {
+  top: 110px;
+  width: 440px;
+}
+
+.fitness-impact-grid {
+  position: absolute;
+  top: 237px;
+  left: 80px;
+  display: grid;
+  width: 1280px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.fitness-impact-grid article {
+  display: flex;
+  height: 140px;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 36px;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.fitness-impact-grid strong {
+  color: #43a5d5;
+  font-size: 52px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.fitness-impact-grid span {
+  margin-top: 14px;
+  color: #909090;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: 0.32px;
+  white-space: nowrap;
+}
+
+.fitness-case-process-cta { height: 162px; }
+
+.fitness-case-process-cta a {
+  position: absolute;
+  top: 32px;
+  left: 488px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 465px;
+  height: 64px;
+  border-radius: 106px;
+  background: #2a2a2a;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: normal;
+  white-space: nowrap;
+}
+

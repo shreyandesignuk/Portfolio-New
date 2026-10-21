@@ -1,0 +1,10 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block" width="1" height="79.5" viewBox="0 0 1 79.5" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0.5 0V79.5" stroke="url(#divider-gradient)"/>
+  <defs>
+    <linearGradient id="divider-gradient" x1="1.50007" y1="74.5" x2="1.50007" y2="0.500002" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#606060" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#606060"/>
+      <stop offset="1" stop-color="#606060" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+</svg>
