@@ -151,7 +151,7 @@ export default function GlobalHeader({
             About me
           </a>
           <a
-            href="https://drive.google.com/file/d/13fumVX85BxgyiBvKgOcIwz1aO1-PgVSm/view?usp=sharing"
+            href="https://drive.google.com/file/d/1UmXaEpKvLDa-yTv9qysf7QeET6L4XUby/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             tabIndex={introIsActive ? -1 : undefined}
