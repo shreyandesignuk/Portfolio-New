@@ -13,6 +13,7 @@ const INTRO_TIMING = {
 
 export default function GlobalHeader({
   isCaseStudy,
+  isAbout,
   isScrolled = false,
   isHidden = false,
   introComplete,
@@ -126,7 +127,7 @@ export default function GlobalHeader({
   return (
     <>
       <nav
-        className={`global-header${isCaseStudy ? ' is-case-study' : ''}${isScrolled ? ' is-scrolled' : ''}${isHidden ? ' is-scroll-hidden' : ''}${brandIsVisible ? ' is-brand-visible' : ''}${linksAreVisible ? ' is-links-visible' : ''}${stage === 'complete' ? ' is-complete' : ''}`}
+        className={`global-header${isCaseStudy ? ' is-case-study' : ''}${isAbout ? ' is-about' : ''}${isScrolled ? ' is-scrolled' : ''}${isHidden ? ' is-scroll-hidden' : ''}${brandIsVisible ? ' is-brand-visible' : ''}${linksAreVisible ? ' is-links-visible' : ''}${stage === 'complete' ? ' is-complete' : ''}`}
         aria-label="Primary navigation"
         aria-hidden={introIsActive}
       >
@@ -141,14 +142,16 @@ export default function GlobalHeader({
         </a>
         <div className="global-header-links">
           <a
-            href="/#expertise"
-            onClick={(event) => onNavigate(event, '/#expertise')}
+            className={isAbout ? 'is-active' : undefined}
+            href="/about"
+            onClick={(event) => onNavigate(event, '/about')}
+            aria-current={isAbout ? 'page' : undefined}
             tabIndex={introIsActive ? -1 : undefined}
           >
             About me
           </a>
           <a
-            href="https://drive.google.com/file/d/1pecO7rCBcaD-86hpTheF4Od65Td6Hxib/view?usp=sharing"
+            href="https://drive.google.com/file/d/13fumVX85BxgyiBvKgOcIwz1aO1-PgVSm/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             tabIndex={introIsActive ? -1 : undefined}

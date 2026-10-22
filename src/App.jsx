@@ -14,6 +14,7 @@ import FintechCaseStudyDetail from './FintechCaseStudyDetail';
 import HealthcareCaseStudy from './HealthcareCaseStudy';
 import HealthcareCaseStudyDetail from './HealthcareCaseStudyDetail';
 import OutdoorFitnessCaseStudy from './OutdoorFitnessCaseStudy';
+import AboutPage from './AboutPage';
 
 const ASSET_PATH = '/assets';
 
@@ -654,6 +655,7 @@ export default function App() {
   const isHealthcareOverview = path === '/work/healthcare-platform';
   const isHealthcareDetail = path === '/work/healthcare-platform/in-detail';
   const isOutdoorFitnessOverview = path === '/work/outdoor-fitness-app';
+  const isAbout = path === '/about';
   const isCaseStudy = isOverview
     || isDetail
     || isFintechOverview
@@ -716,6 +718,8 @@ export default function App() {
         onDetail={(event) => event.preventDefault()}
       />
     );
+  } else if (isAbout) {
+    pageContent = <AboutPage />;
   } else {
     pageContent = (
       <main className={`page-shell${transitionPhase === 'leaving' ? ' is-leaving' : ''}`}>
@@ -739,6 +743,7 @@ export default function App() {
       />
       <GlobalHeader
         isCaseStudy={isCaseStudy}
+        isAbout={isAbout}
         isScrolled={navigationIsScrolled}
         isHidden={navigationIsHidden}
         introComplete={hasCompletedIntro}
