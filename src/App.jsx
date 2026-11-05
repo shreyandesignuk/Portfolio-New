@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
 import Hero3D from './components/Hero3D';
 import LogoMarquee from './components/LogoMarquee';
@@ -25,7 +25,7 @@ const clients = [
   { name: 'Darden', className: 'darden', src: `${ASSET_PATH}/darden-logo.png` },
   { name: 'Gilead', className: 'gilead', src: `${ASSET_PATH}/gilead-logo.svg` },
   {
-    name: 'Virginia Department of Health',
+    name: 'Vidal Health',
     className: 'virginia',
     src: `${ASSET_PATH}/virginia-department-logo.png`,
   },
@@ -123,155 +123,31 @@ const expertise = [
   },
 ];
 
-const londonTimeFormatter = new Intl.DateTimeFormat('en-GB', {
-  timeZone: 'Europe/London',
-  hour: '2-digit',
-  minute: '2-digit',
-  hour12: false,
-  timeZoneName: 'short',
-});
-
-function LondonClock() {
-  const [now, setNow] = useState(() => new Date());
-
-  useEffect(() => {
-    let intervalId;
-    const timeoutId = window.setTimeout(() => {
-      setNow(new Date());
-      intervalId = window.setInterval(() => setNow(new Date()), 60_000);
-    }, 60_000 - (Date.now() % 60_000));
-
-    return () => {
-      window.clearTimeout(timeoutId);
-      window.clearInterval(intervalId);
-    };
-  }, []);
-
-  return <time dateTime={now.toISOString()}>{londonTimeFormatter.format(now)}</time>;
-}
-
-const heroWords = ['purpose', 'clarity', 'insight', 'impact'];
-
-function DynamicHeroWord({ active, onInitialNearlyTyped }) {
-  const [word, setWord] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
-  const onInitialNearlyTypedRef = useRef(onInitialNearlyTyped);
-  const [reduceMotion, setReduceMotion] = useState(
-    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
-  );
-
-  useEffect(() => {
-    onInitialNearlyTypedRef.current = onInitialNearlyTyped;
-  }, [onInitialNearlyTyped]);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const handleChange = (event) => setReduceMotion(event.matches);
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, []);
-
-  useEffect(() => {
-    if (!active) {
-      setWord('');
-      setIsTyping(false);
-      return undefined;
-    }
-
-    if (reduceMotion) {
-      setWord(heroWords[0]);
-      setIsTyping(false);
-      onInitialNearlyTypedRef.current?.();
-      return undefined;
-    }
-
-    let cancelled = false;
-    let wordIndex = 0;
-    let visibleWord = '';
-    const timers = new Set();
-
-    const sleep = (duration) => new Promise((resolve) => {
-      const timerId = window.setTimeout(() => {
-        timers.delete(timerId);
-        resolve();
-      }, duration);
-      timers.add(timerId);
-    });
-
-    const typeWord = async (nextWord, onNearlyComplete) => {
-      setIsTyping(true);
-      for (const [characterIndex, character] of [...nextWord].entries()) {
-        if (cancelled) return false;
-        visibleWord += character;
-        setWord(visibleWord);
-        if (characterIndex === nextWord.length - 2) onNearlyComplete?.();
-        await sleep(55);
-      }
-      setIsTyping(false);
-      return true;
-    };
-
-    const changeWord = async () => {
-      if (cancelled) return;
-      wordIndex = (wordIndex + 1) % heroWords.length;
-      setIsTyping(true);
-
-      while (visibleWord.length > 0 && !cancelled) {
-        visibleWord = visibleWord.slice(0, -1);
-        setWord(visibleWord);
-        await sleep(32);
-      }
-
-      await sleep(70);
-
-      await typeWord(heroWords[wordIndex]);
-    };
-
-    let cycleTimer;
-    const begin = async () => {
-      const completed = await typeWord(heroWords[0], () => onInitialNearlyTypedRef.current?.());
-      if (!completed || cancelled) return;
-      cycleTimer = window.setInterval(changeWord, 3_000);
-    };
-
-    begin();
-
-    return () => {
-      cancelled = true;
-      window.clearInterval(cycleTimer);
-      timers.forEach((timerId) => window.clearTimeout(timerId));
-    };
-  }, [active, reduceMotion]);
-
-  return <em className={`dynamic-hero-word${isTyping ? ' is-typing' : ''}`}>{word}</em>;
-}
+// The artwork previously appeared 530ms plus five 55ms typing steps after the copy.
+const HERO_MEDIA_REVEAL_DELAY = 805;
 
 function ClientLogos() {
   return (
     <div className="clients">
-      <p className="section-label">Teams I have worked with</p>
+      <p className="section-label">Experience across global brands</p>
       <LogoMarquee clients={clients} />
     </div>
   );
 }
 
-function Hero({ isReady }) {
-  const [wordIsReady, setWordIsReady] = useState(false);
+function Hero({ isReady, onNavigate }) {
   const [mediaIsReady, setMediaIsReady] = useState(false);
 
   useEffect(() => {
     if (!isReady) {
-      setWordIsReady(false);
       setMediaIsReady(false);
       return undefined;
     }
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const timer = window.setTimeout(() => setWordIsReady(true), reduceMotion ? 0 : 530);
+    const timer = window.setTimeout(() => setMediaIsReady(true), reduceMotion ? 0 : HERO_MEDIA_REVEAL_DELAY);
     return () => window.clearTimeout(timer);
   }, [isReady]);
-
-  const handleInitialWordNearlyTyped = useCallback(() => setMediaIsReady(true), []);
 
   return (
     <header className={`hero${isReady ? ' is-copy-visible' : ''}${mediaIsReady ? ' is-media-visible' : ''}`} id="top">
@@ -279,22 +155,22 @@ function Hero({ isReady }) {
         {mediaIsReady && <Hero3D />}
         <div className="hero-banner">
           <div className="intro">
-            <div className="metadata" aria-label="Role, location, and local time">
-              <span>Senior Product Designer</span>
-              <span>London</span>
-              <span><LondonClock /></span>
+            <div className="hero-copy">
+              <h1>
+                Designing complex products into clear,{' '}
+                <span className="hero-accent">usable experiences.</span>
+              </h1>
+              <p className="hero-summary">
+                Product Designer working across enterprise platforms, complex workflows and customer-facing products, from discovery and product strategy through interaction design and delivery.
+              </p>
             </div>
-            <h1>
-              <span>Designing experiences</span>
-              <span>driven by empathy,</span>
-              <span>
-                shaped by{' '}
-                <DynamicHeroWord
-                  active={wordIsReady}
-                  onInitialNearlyTyped={handleInitialWordNearlyTyped}
-                />
-              </span>
-            </h1>
+            <a
+              className="hero-work-link"
+              href="#work-title"
+              onClick={(event) => onNavigate(event, '#work-title')}
+            >
+              View featured work
+            </a>
           </div>
           {mediaIsReady && <ClientLogos />}
         </div>
@@ -604,7 +480,7 @@ export default function App() {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   };
 
-  const navigateFromGlobalHeader = (event, destination) => {
+  const navigateSite = (event, destination) => {
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
     if (transitionPhase !== 'idle') return;
@@ -723,7 +599,7 @@ export default function App() {
   } else {
     pageContent = (
       <main className={`page-shell${transitionPhase === 'leaving' ? ' is-leaving' : ''}`}>
-        <Hero isReady={hasCompletedIntro} />
+        <Hero isReady={hasCompletedIntro} onNavigate={navigateSite} />
         <FeaturedWork
           onOpen={openCaseStudy}
           transitionPhase={transitionPhase}
@@ -748,7 +624,7 @@ export default function App() {
         isHidden={navigationIsHidden}
         introComplete={hasCompletedIntro}
         onIntroComplete={() => setHasCompletedIntro(true)}
-        onNavigate={navigateFromGlobalHeader}
+        onNavigate={navigateSite}
       />
       {isCaseStudy && (
         <ProjectToggle

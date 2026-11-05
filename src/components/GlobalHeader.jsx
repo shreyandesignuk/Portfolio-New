@@ -11,6 +11,33 @@ const INTRO_TIMING = {
   complete: 4_850,
 };
 
+const londonTimeFormatter = new Intl.DateTimeFormat('en-GB', {
+  timeZone: 'Europe/London',
+  hour: '2-digit',
+  minute: '2-digit',
+  hour12: false,
+  timeZoneName: 'short',
+});
+
+function LondonClock() {
+  const [now, setNow] = useState(() => new Date());
+
+  useEffect(() => {
+    let intervalId;
+    const timeoutId = window.setTimeout(() => {
+      setNow(new Date());
+      intervalId = window.setInterval(() => setNow(new Date()), 60_000);
+    }, 60_000 - (Date.now() % 60_000));
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      window.clearInterval(intervalId);
+    };
+  }, []);
+
+  return <time dateTime={now.toISOString()}>{londonTimeFormatter.format(now)}</time>;
+}
+
 export default function GlobalHeader({
   isCaseStudy,
   isAbout,
@@ -140,6 +167,10 @@ export default function GlobalHeader({
           <img src="/assets/shreyan-portrait.png" alt="" />
           <span>Shreyan Akash Das</span>
         </a>
+        <div className="global-header-location">
+          <span>London</span>
+          <LondonClock />
+        </div>
         <div className="global-header-links">
           <a
             className={isAbout ? 'is-active' : undefined}
