@@ -74,6 +74,220 @@ a {
   text-decoration: none;
 }
 
+.responsive-holding-page {
+  position: fixed;
+  z-index: 10000;
+  inset: 0;
+  display: flex;
+  min-height: 100dvh;
+  flex-direction: column;
+  overflow: auto;
+  padding: clamp(24px, 4.5vw, 64px);
+  background:
+    radial-gradient(circle at 82% 18%, rgb(106 113 230 / 18%), transparent 32%),
+    radial-gradient(circle at 12% 90%, rgb(223 86 220 / 12%), transparent 30%),
+    var(--color-background);
+  color: var(--color-text);
+}
+
+.responsive-holding-header,
+.responsive-holding-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.responsive-holding-name {
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.responsive-holding-footer {
+  color: var(--color-muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.responsive-holding-content {
+  display: grid;
+  width: min(100%, 1120px);
+  flex: 1;
+  grid-template-columns: minmax(260px, 0.8fr) minmax(420px, 1.2fr);
+  align-items: center;
+  align-self: center;
+  gap: clamp(56px, 8vw, 120px);
+  padding: clamp(64px, 10vh, 120px) 0;
+}
+
+.responsive-holding-visual {
+  position: relative;
+  width: min(32vw, 360px);
+  aspect-ratio: 1;
+  justify-self: center;
+}
+
+.responsive-holding-visual .hero-model {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: homepage-media-fade-in 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.responsive-holding-copy {
+  max-width: 660px;
+}
+
+.responsive-holding-eyebrow {
+  margin-bottom: 18px;
+  color: var(--color-accent);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.responsive-holding-copy h1 {
+  max-width: 650px;
+  font-size: clamp(54px, 6.2vw, 88px);
+  font-weight: 580;
+  line-height: 0.94;
+  letter-spacing: -0.06em;
+}
+
+.responsive-holding-copy > p:not(.responsive-holding-eyebrow) {
+  max-width: 570px;
+  margin-top: 28px;
+  color: var(--color-muted);
+  font-size: clamp(17px, 1.8vw, 21px);
+  line-height: 1.45;
+}
+
+.responsive-holding-resume {
+  display: inline-flex;
+  min-width: 172px;
+  min-height: 54px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  margin-top: 36px;
+  padding: 0 22px 0 26px;
+  border-radius: 999px;
+  background: var(--color-footer);
+  color: #fff;
+  font-size: 17px;
+  font-weight: 500;
+  transition: transform 240ms ease, background-color 240ms ease;
+}
+
+.responsive-holding-resume:hover {
+  transform: translateY(-2px);
+  background: var(--color-accent);
+}
+
+.responsive-holding-resume:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+.responsive-holding-footer {
+  padding-top: 18px;
+  border-top: 1px solid rgb(16 16 16 / 14%);
+}
+
+@media (max-width: 1023px) {
+  html,
+  body,
+  #root {
+    width: 100%;
+    min-width: 0;
+    min-height: 100%;
+  }
+}
+
+html.is-responsive-scaled,
+html.is-responsive-scaled body,
+html.is-responsive-scaled #root {
+  width: 100%;
+  min-width: 0;
+  overflow-x: clip;
+}
+
+.responsive-portfolio-frame.is-scaled {
+  width: 1440px;
+}
+
+@media (max-width: 760px) {
+  .responsive-holding-page {
+    padding: 24px 20px;
+  }
+
+  .responsive-holding-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 52px 0 64px;
+  }
+
+  .responsive-holding-visual {
+    width: min(76vw, 280px);
+  }
+
+  .responsive-holding-copy {
+    text-align: center;
+  }
+
+  .responsive-holding-copy h1 {
+    margin: 0 auto;
+    font-size: clamp(48px, 15vw, 74px);
+  }
+
+  .responsive-holding-copy > p:not(.responsive-holding-eyebrow) {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .responsive-holding-resume {
+    margin-top: 30px;
+  }
+
+  .responsive-holding-footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 380px), (max-height: 680px) {
+  .responsive-holding-content {
+    gap: 28px;
+    padding: 38px 0 46px;
+  }
+
+  .responsive-holding-visual {
+    width: min(58vw, 210px);
+  }
+
+  .responsive-holding-copy h1 {
+    font-size: clamp(42px, 14vw, 58px);
+  }
+
+  .responsive-holding-copy > p:not(.responsive-holding-eyebrow) {
+    margin-top: 20px;
+    font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .responsive-holding-resume {
+    transition: none;
+  }
+}
+
 p,
 h1,
 h2,

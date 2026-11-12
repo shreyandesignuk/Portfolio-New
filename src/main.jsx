@@ -2,6 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Analytics } from '@vercel/analytics/react';
 import App from './App.jsx';
+import ResponsiveGate from './components/ResponsiveGate.jsx';
 import './styles.css';
 
 if ('scrollRestoration' in window.history) {
@@ -22,7 +23,9 @@ if (navigationEntry?.type === 'reload') {
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <ResponsiveGate>
+      <App />
+    </ResponsiveGate>
     <Analytics />
   </StrictMode>,
 );
