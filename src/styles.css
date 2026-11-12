@@ -15,6 +15,22 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Aeonik Trial";
+  src: url("/fonts/aeonik-trial-regular.otf") format("opentype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aeonik Trial";
+  src: url("/fonts/aeonik-trial-bold.otf") format("opentype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
 :root {
   --content-width: 1280px;
   --page-width: 1440px;
@@ -176,8 +192,8 @@ h3 {
 }
 
 .global-header.is-case-study {
-  grid-template-columns: 1fr auto auto;
-  column-gap: 48px;
+  grid-template-columns: 1fr auto;
+  column-gap: 0;
   color: var(--color-surface);
 }
 
@@ -7111,6 +7127,853 @@ h3 {
 /* Outdoor fitness app overview — Figma 8:1290 */
 .fitness-case-page {
   min-height: 0;
+}
+
+/* Outdoor fitness app in-detail — section 1: hero (Figma 33:1100) */
+.fitness-detail-page {
+  width: 100%;
+  min-width: var(--page-width);
+  min-height: 1337px;
+  overflow: hidden;
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+.fitness-detail-hero {
+  position: relative;
+  width: var(--page-width);
+  height: 1337px;
+  margin: 0 auto;
+  background: var(--color-background);
+}
+
+.fitness-detail-hero-background {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: var(--page-width);
+  height: 367px;
+  background: #3d82c6;
+}
+
+.fitness-detail-hero > h1 {
+  position: absolute;
+  z-index: 1;
+  top: 200px;
+  left: 80px;
+  width: 870px;
+  color: var(--color-surface);
+  font-size: 54px;
+  font-weight: 500;
+  line-height: 1.1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fitness-detail-hero-art {
+  position: absolute;
+  top: 367px;
+  left: 0;
+  width: var(--page-width);
+  height: 742px;
+  overflow: hidden;
+}
+
+.fitness-detail-hero-art img {
+  position: absolute;
+  top: 31px;
+  left: 150px;
+  display: block;
+  width: 1140px;
+  height: 679px;
+  max-width: none;
+  object-fit: contain;
+}
+
+.fitness-detail-meta {
+  position: absolute;
+  top: 1157px;
+  left: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 1280px;
+  height: 180px;
+}
+
+.fitness-detail-meta-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  color: var(--color-text);
+  font-size: 16px;
+  line-height: normal;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fitness-detail-meta-role {
+  width: 307px;
+  height: 180px;
+  gap: 13px;
+}
+
+.fitness-detail-meta-scope {
+  width: 434px;
+  height: 180px;
+}
+
+.fitness-detail-meta-scale {
+  width: 353px;
+}
+
+.fitness-detail-meta-item > strong {
+  font-weight: 500;
+  letter-spacing: 0.96px;
+  text-transform: uppercase;
+}
+
+.fitness-detail-meta-item > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+  letter-spacing: 0.32px;
+}
+
+.fitness-detail-meta-item span {
+  display: block;
+  color: var(--color-muted);
+  font-weight: 500;
+}
+
+.fitness-detail-meta-item p {
+  color: var(--color-subtle);
+  font-weight: 400;
+}
+
+.fitness-detail-meta-role p { width: 307px; }
+.fitness-detail-meta-scope span { width: 328px; }
+.fitness-detail-meta-scope p { width: 434px; }
+.fitness-detail-meta-scale span { width: 278px; }
+.fitness-detail-meta-scale p { width: 353px; }
+
+.fitness-detail-meta-divider {
+  display: block;
+  flex: 0 0 1px;
+  width: 1px;
+  height: 79.5px;
+}
+
+/* Outdoor fitness app in-detail — section 2: overview (Figma 12:6270) */
+.fitness-detail-overview {
+  position: relative;
+  width: var(--page-width);
+  height: 307px;
+  margin: 0 auto;
+  background: var(--color-background);
+}
+
+.fitness-detail-overview > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  color: var(--color-text);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fitness-detail-overview-copy {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  display: flex;
+  flex-direction: column;
+  gap: 20.8px;
+  width: 954px;
+  color: var(--color-muted);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+/* Outdoor fitness app in-detail — section 3: problem (Figma 12:6273) */
+.fitness-detail-problem {
+  position: relative;
+  width: var(--page-width);
+  height: 349px;
+  margin: 0 auto;
+  background: var(--color-background);
+}
+
+.fitness-detail-problem > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  color: var(--color-text);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fitness-detail-problem-copy {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  display: flex;
+  flex-direction: column;
+  gap: 20.8px;
+  width: 954px;
+  color: var(--color-muted);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+/* Outdoor fitness app in-detail — section 4: design challenge (Figma 12:6276) */
+.fitness-detail-design-challenge {
+  position: relative;
+  width: var(--page-width);
+  height: 390px;
+  margin: 0 auto;
+  background: #3d82c6;
+  color: var(--color-surface);
+}
+
+.fitness-detail-design-challenge > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fitness-detail-design-challenge > blockquote {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  width: 954px;
+  margin: 0;
+  font-size: 42px;
+  font-weight: 200;
+  line-height: 1.1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+/* Outdoor fitness app in-detail — section 5: core usability issues (Figma 12:6279) */
+.fitness-detail-usability {
+  position: relative;
+  width: var(--page-width);
+  height: 576px;
+  margin: 0 auto;
+  background: var(--color-background);
+}
+
+.fitness-detail-usability > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 181px;
+  color: var(--color-text);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fitness-detail-usability-grid {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  display: grid;
+  grid-template-columns: repeat(3, 302px);
+  grid-template-rows: repeat(2, 190px);
+  gap: 36px 24px;
+  width: 954px;
+  height: 416px;
+}
+
+.fitness-detail-usability-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--color-surface);
+}
+
+.fitness-detail-usability-card > h3 {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  color: var(--color-text);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.36px;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fitness-detail-usability-card > p {
+  position: absolute;
+  top: 95px;
+  left: 32px;
+  color: var(--color-muted);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fitness-detail-usability-poor-access > h3,
+.fitness-detail-usability-manual-setup > h3,
+.fitness-detail-usability-outdated-visuals > h3 { width: 237px; }
+
+.fitness-detail-usability-weak-progress > h3 { width: 241px; }
+.fitness-detail-usability-personalisation > h3 {
+  width: 206px;
+  white-space: nowrap;
+}
+.fitness-detail-usability-low-motivation > h3 { width: 231px; }
+
+.fitness-detail-usability-poor-access > p { width: 229px; }
+.fitness-detail-usability-manual-setup > p,
+.fitness-detail-usability-personalisation > p { width: 237px; }
+.fitness-detail-usability-weak-progress > p { width: 241px; }
+.fitness-detail-usability-outdated-visuals > p,
+.fitness-detail-usability-low-motivation > p { width: 247px; }
+
+/* Outdoor fitness app in-detail — section 6: challenges (Figma 12:6308) */
+.fitness-detail-challenges {
+  position: relative;
+  width: var(--page-width);
+  height: 798px;
+  margin: 0 auto;
+  background: #3d82c6;
+  color: var(--color-surface);
+}
+
+.fitness-detail-challenges > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fitness-detail-challenges-summary {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  width: 954px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fitness-detail-challenges-summary strong {
+  font-weight: 700;
+}
+
+.fitness-detail-challenges-list {
+  position: absolute;
+  top: 186px;
+  left: 0;
+  width: var(--page-width);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fitness-detail-challenges-list > li {
+  position: relative;
+  width: 100%;
+  height: 116px;
+}
+
+.fitness-detail-challenges-list > li:last-child {
+  height: 68px;
+}
+
+.fitness-detail-challenges-list > li > strong {
+  position: absolute;
+  top: 0;
+  left: 80px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.fitness-detail-challenges-list > li > p {
+  position: absolute;
+  top: 0;
+  left: 406px;
+  width: 954px;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.2;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fitness-detail-challenges-list > li:nth-child(1) > p,
+.fitness-detail-challenges-list > li:nth-child(3) > p {
+  width: 972px;
+}
+
+.fitness-detail-challenges-list > li > img {
+  position: absolute;
+  top: 92px;
+  left: 80px;
+  display: block;
+  max-width: none;
+}
+
+/* Outdoor fitness app in-detail — section 7: design question (Figma 12:6325) */
+.fitness-detail-design-question {
+  position: relative;
+  width: var(--page-width);
+  height: 425px;
+  margin: 0 auto;
+  background: #3d82c6;
+  color: var(--color-surface);
+}
+
+.fitness-detail-design-question > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fitness-detail-design-question > p {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  width: 954px;
+  font-size: 48px;
+  font-weight: 200;
+  line-height: 1.1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+/* Outdoor fitness app in-detail — section 8: design process (Figma 12:6328) */
+.fitness-detail-process {
+  position: relative;
+  width: var(--page-width);
+  height: 1724px;
+  margin: 0 auto;
+  background: var(--color-background);
+}
+
+.fitness-detail-process > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 217px;
+  color: var(--color-text);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fitness-detail-process-summary {
+  position: absolute;
+  top: 91px;
+  left: 406px;
+  width: 954px;
+  color: var(--color-muted);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fitness-detail-process-list {
+  position: absolute;
+  top: 144px;
+  left: 406px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 954px;
+  height: 1500px;
+}
+
+.fitness-detail-process-card {
+  position: relative;
+  flex: 0 0 auto;
+  width: 954px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 24px;
+  background: var(--color-surface);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.fitness-detail-process-card-1,
+.fitness-detail-process-card-2,
+.fitness-detail-process-card-4 { height: 230px; }
+
+.fitness-detail-process-card-3,
+.fitness-detail-process-card-5 { height: 202px; }
+
+.fitness-detail-process-card-6 { height: 286px; }
+
+.fitness-detail-process-card > header {
+  position: absolute;
+  top: 41px;
+  left: 41px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 872px;
+  height: 40px;
+}
+
+.fitness-detail-process-card h3 {
+  color: #1e293b;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 36px;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fitness-detail-process-card header span {
+  color: #3d82c6;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 40px;
+  opacity: 0.8;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fitness-detail-process-card > p {
+  position: absolute;
+  top: 105px;
+  left: 41px;
+  width: 696px;
+  color: #475569;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+/* Outdoor fitness app in-detail — section 9: strategic shift (Figma 12:6373) */
+.fitness-detail-strategic-shift {
+  position: relative;
+  width: var(--page-width);
+  height: 372px;
+  margin: 0 auto;
+  background: #3d82c6;
+  color: var(--color-surface);
+}
+
+.fitness-detail-strategic-shift > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 183px;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fitness-detail-strategic-shift > p {
+  position: absolute;
+  top: 80px;
+  left: 406px;
+  width: 954px;
+  font-size: 48px;
+  font-weight: 200;
+  line-height: 1.1;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+/* Outdoor fitness app in-detail — section 10: key UX interventions (Figma 12:6376) */
+.fitness-detail-interventions {
+  position: relative;
+  width: var(--page-width);
+  height: 10524px;
+  margin: 0 auto;
+  background: var(--color-background);
+}
+
+.fitness-detail-interventions > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 217px;
+  color: var(--color-text);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fitness-detail-interventions-list {
+  position: absolute;
+  top: 196px;
+  left: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 51.406px;
+  width: 1280px;
+}
+
+.fitness-detail-intervention-card {
+  position: relative;
+  flex: 0 0 auto;
+  width: 1280px;
+  overflow: hidden;
+  border: 1.285px solid #e8eaee;
+  border-radius: 15.422px;
+  background: #fff;
+  color: #181d25;
+  font-family: "Aeonik Trial", "Helvetica Neue", Arial, sans-serif;
+}
+
+.fitness-detail-intervention-onboarding,
+.fitness-detail-intervention-zones {
+  height: 1290.811px;
+}
+
+.fitness-detail-intervention-home-court,
+.fitness-detail-intervention-geofence {
+  height: 1238.811px;
+}
+
+.fitness-detail-intervention-levels,
+.fitness-detail-intervention-trainers,
+.fitness-detail-intervention-apple-health {
+  height: 1213.811px;
+}
+
+.fitness-detail-intervention-check-in {
+  height: 1187.811px;
+}
+
+.fitness-detail-intervention-card > h3 {
+  position: absolute;
+  top: 52.691px;
+  left: 32.129px;
+  color: #181d25;
+  font-size: 46.265px;
+  font-weight: 400;
+  line-height: 51.406px;
+  letter-spacing: 1.8506px;
+  white-space: nowrap;
+}
+
+.fitness-detail-intervention-summary {
+  position: absolute;
+  top: 135.534px;
+  left: 32.129px;
+  display: grid;
+  grid-template-columns: repeat(3, 391.539px);
+  gap: 20.562px;
+  width: 1215.743px;
+}
+
+.fitness-detail-intervention-onboarding .fitness-detail-intervention-summary,
+.fitness-detail-intervention-zones .fitness-detail-intervention-summary {
+  height: 214.554px;
+}
+
+.fitness-detail-intervention-home-court .fitness-detail-intervention-summary,
+.fitness-detail-intervention-geofence .fitness-detail-intervention-summary {
+  height: 162.554px;
+}
+
+.fitness-detail-intervention-levels .fitness-detail-intervention-summary,
+.fitness-detail-intervention-trainers .fitness-detail-intervention-summary,
+.fitness-detail-intervention-apple-health .fitness-detail-intervention-summary {
+  height: 137.554px;
+}
+
+.fitness-detail-intervention-check-in .fitness-detail-intervention-summary {
+  height: 111.554px;
+}
+
+.fitness-detail-intervention-note {
+  min-height: 0;
+  height: 100%;
+  padding: 16.707px 21.847px;
+  border: 1.285px solid;
+  border-radius: 15.422px;
+}
+
+.fitness-detail-intervention-check-in .fitness-detail-intervention-note,
+.fitness-detail-intervention-apple-health .fitness-detail-intervention-note {
+  padding-right: 16.707px;
+  padding-left: 16.707px;
+}
+
+.fitness-detail-intervention-check-in .fitness-detail-intervention-note > p,
+.fitness-detail-intervention-apple-health .fitness-detail-intervention-note > p {
+  letter-spacing: -0.1px;
+}
+
+.fitness-detail-intervention-note > strong {
+  display: block;
+  margin-bottom: 5.141px;
+  font-size: 12.851px;
+  font-weight: 700;
+  line-height: 20.884px;
+  letter-spacing: 0.6426px;
+  text-transform: uppercase;
+}
+
+.fitness-detail-intervention-note > p {
+  color: rgba(24, 29, 37, 0.7);
+  font-size: 17.992px;
+  font-weight: 400;
+  line-height: 25.703px;
+}
+
+.fitness-detail-intervention-problem {
+  border-color: #f6d5d5;
+  background: #fdecec;
+}
+
+.fitness-detail-intervention-problem > strong {
+  color: #b62020;
+}
+
+.fitness-detail-intervention-solution {
+  border-color: #c9e8d6;
+  background: #e7f8ee;
+}
+
+.fitness-detail-intervention-solution > strong {
+  color: #267346;
+}
+
+.fitness-detail-intervention-result {
+  border-color: #dbeafe;
+  background: #eff6ff;
+}
+
+.fitness-detail-intervention-result > strong {
+  color: #1a5de6;
+}
+
+.fitness-detail-intervention-visual {
+  position: absolute;
+  left: 32.129px;
+  display: block;
+  width: 1215.743px;
+  height: 857.189px;
+  border-radius: 51.406px;
+  object-fit: fill;
+}
+
+.fitness-detail-intervention-onboarding .fitness-detail-intervention-visual,
+.fitness-detail-intervention-zones .fitness-detail-intervention-visual {
+  top: 380.932px;
+}
+
+.fitness-detail-intervention-home-court .fitness-detail-intervention-visual,
+.fitness-detail-intervention-geofence .fitness-detail-intervention-visual {
+  top: 328.932px;
+}
+
+.fitness-detail-intervention-levels .fitness-detail-intervention-visual,
+.fitness-detail-intervention-trainers .fitness-detail-intervention-visual {
+  top: 303.932px;
+}
+
+.fitness-detail-intervention-check-in .fitness-detail-intervention-visual {
+  top: 277.932px;
+}
+
+.fitness-detail-intervention-apple-health .fitness-detail-intervention-visual {
+  top: 303.932px;
+}
+
+/* Outdoor fitness app in-detail — section 11: projected outcomes (Figma 35:3721) */
+.fitness-detail-outcomes {
+  position: relative;
+  width: var(--page-width);
+  height: 394px;
+  margin: 0 auto;
+  background: var(--color-background);
+}
+
+.fitness-detail-outcomes > h2 {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 584px;
+  color: var(--color-text);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fitness-detail-outcomes-grid {
+  position: absolute;
+  top: 170px;
+  left: 80px;
+  display: grid;
+  grid-template-columns: repeat(4, 302px);
+  gap: 24px;
+  width: 1280px;
+}
+
+.fitness-detail-outcome-card {
+  position: relative;
+  width: 302px;
+  height: 138px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--color-surface);
+}
+
+.fitness-detail-outcome-card > strong {
+  position: absolute;
+  top: 28px;
+  left: 36px;
+  color: #009bdb;
+  font-size: 52px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+}
+
+.fitness-detail-outcome-card > p {
+  position: absolute;
+  top: 92px;
+  left: 36px;
+  color: #909090;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: 0.32px;
+  white-space: nowrap;
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
 }
 
 .fitness-case-hero {

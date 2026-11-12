@@ -167,10 +167,12 @@ export default function GlobalHeader({
           <img src="/assets/shreyan-portrait.png" alt="" />
           <span>Shreyan Akash Das</span>
         </a>
-        <div className="global-header-location">
-          <span>London</span>
-          <LondonClock />
-        </div>
+        {!isCaseStudy && (
+          <div className="global-header-location">
+            <span>London</span>
+            <LondonClock />
+          </div>
+        )}
         <div className="global-header-links">
           <a
             className={isAbout ? 'is-active' : undefined}

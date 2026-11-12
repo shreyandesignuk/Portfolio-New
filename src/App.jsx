@@ -14,6 +14,7 @@ import FintechCaseStudyDetail from './FintechCaseStudyDetail';
 import HealthcareCaseStudy from './HealthcareCaseStudy';
 import HealthcareCaseStudyDetail from './HealthcareCaseStudyDetail';
 import OutdoorFitnessCaseStudy from './OutdoorFitnessCaseStudy';
+import OutdoorFitnessCaseStudyDetail from './OutdoorFitnessCaseStudyDetail';
 import AboutPage from './AboutPage';
 
 const ASSET_PATH = '/assets';
@@ -531,6 +532,7 @@ export default function App() {
   const isHealthcareOverview = path === '/work/healthcare-platform';
   const isHealthcareDetail = path === '/work/healthcare-platform/in-detail';
   const isOutdoorFitnessOverview = path === '/work/outdoor-fitness-app';
+  const isOutdoorFitnessDetail = path === '/work/outdoor-fitness-app/in-detail';
   const isAbout = path === '/about';
   const isCaseStudy = isOverview
     || isDetail
@@ -538,15 +540,16 @@ export default function App() {
     || isFintechDetail
     || isHealthcareOverview
     || isHealthcareDetail
-    || isOutdoorFitnessOverview;
-  const activeCaseStudyView = isDetail || isFintechDetail || isHealthcareDetail
+    || isOutdoorFitnessOverview
+    || isOutdoorFitnessDetail;
+  const activeCaseStudyView = isDetail || isFintechDetail || isHealthcareDetail || isOutdoorFitnessDetail
     ? 'detail'
     : 'overview';
   const activeCaseStudyBase = isFintechOverview || isFintechDetail
     ? '/work/fintech-platform'
     : isHealthcareOverview || isHealthcareDetail
       ? '/work/healthcare-platform'
-      : isOutdoorFitnessOverview
+      : isOutdoorFitnessOverview || isOutdoorFitnessDetail
         ? '/work/outdoor-fitness-app'
       : '/work/fortune-500-biopharma';
 
@@ -591,9 +594,11 @@ export default function App() {
   } else if (isOutdoorFitnessOverview) {
     pageContent = (
       <OutdoorFitnessCaseStudy
-        onDetail={(event) => event.preventDefault()}
+        onDetail={(event) => navigateCaseStudy(event, '/work/outdoor-fitness-app/in-detail')}
       />
     );
+  } else if (isOutdoorFitnessDetail) {
+    pageContent = <OutdoorFitnessCaseStudyDetail />;
   } else if (isAbout) {
     pageContent = <AboutPage />;
   } else {
@@ -630,18 +635,9 @@ export default function App() {
         <ProjectToggle
           activeView={activeCaseStudyView}
           overviewHref={activeCaseStudyBase}
-          detailHref={isOutdoorFitnessOverview
-            ? activeCaseStudyBase
-            : `${activeCaseStudyBase}/in-detail`}
-          detailComingSoon={isOutdoorFitnessOverview}
+          detailHref={`${activeCaseStudyBase}/in-detail`}
           onOverview={(event) => navigateCaseStudy(event, activeCaseStudyBase)}
-          onDetail={(event) => {
-            if (isOutdoorFitnessOverview) {
-              event.preventDefault();
-              return;
-            }
-            navigateCaseStudy(event, `${activeCaseStudyBase}/in-detail`);
-          }}
+          onDetail={(event) => navigateCaseStudy(event, `${activeCaseStudyBase}/in-detail`)}
           className={`case-project-toggle global-case-project-toggle${navigationIsScrolled ? ' is-scrolled' : ''}${navigationIsHidden ? ' is-scroll-hidden' : ''}`}
         />
       )}
