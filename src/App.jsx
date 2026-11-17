@@ -326,7 +326,7 @@ function Expertise() {
       <div className="fixed-content expertise-content">
         <h2 id="expertise-title">
           <span>Expertise built through</span>
-          <span><em>6+ years</em> of shipping</span>
+          <span><em>5+ years</em> of shipping</span>
           <span>complex products</span>
         </h2>
         <div className="expertise-grid">
