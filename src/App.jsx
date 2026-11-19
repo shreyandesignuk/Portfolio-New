@@ -398,6 +398,13 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    const canonicalPath = path === '/' ? '/' : path.replace(/\/+$/, '');
+    const canonicalLink = document.querySelector('link[rel="canonical"]');
+
+    canonicalLink?.setAttribute('href', `https://www.shreyanux.com${canonicalPath}`);
+  }, [path]);
+
+  useEffect(() => {
     let previousScrollY = window.scrollY;
     let accumulatedDelta = 0;
     let frameId = null;
